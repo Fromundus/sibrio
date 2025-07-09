@@ -203,7 +203,7 @@ export default function AdminSiteSettings() {
                         <FaClock className="text-tertiary" />
                         <span className="font-medium">Last updated: <span className="text-textSecondary">{format(leaderboard?.created_at, "MMMM d, yyyy – hh:mm a")} · {formatDistanceToNow(leaderboard?.created_at, { addSuffix: true })}</span></span>
                     </div>}
-                    {leaderboard?.cookie_status !== "active" && <Input
+                    {leaderboard?.cookie_status !== "active" && !settingsLoading && <Input
                         id={"cookie"}
                         name={"cookie"}
                         onChange={handleCookieChange}

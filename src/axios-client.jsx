@@ -2,7 +2,7 @@ import axios from "axios";
 import ipconfig from "./ipconfig";
 
 const axiosClient = axios.create({
-    baseURL: `${ipconfig}:8000/api`
+    baseURL: `${ipconfig}`
 });
 
 axiosClient.interceptors.request.use((config) => {

@@ -57,16 +57,20 @@ function Login() {
             })
             .catch( (err) => {
                 console.log(err)
-                if(err.response.status === 422){
+                if(err?.response?.status === 422){
                     setErrors("Invalid Credentials")
+                }
+
+                if(err.message === "Network Error"){
+                    setErrors("Server Offline")
                 }
                 setIsloading(false);
             })
     }
 
     return (
-        <Page>
-            <Card title={"Admin Login"} tcenter={1} className={"mt-20"} maxW={"max-w-md"}>
+        <Page className={"min-h-[80svh] w-full flex items-center"}>
+            <Card title={"Admin Login"} className={"w-full"} tcenter={1}>
                 <Form onSubmit={handleSubmit}>
                     {errors && <span className='text-center bg-red-400 p-1.5 rounded text-white font-semibold mb-2'>{errors}</span>}
                      <Input 

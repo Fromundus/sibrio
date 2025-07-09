@@ -20,6 +20,7 @@ import ak47 from "../assets/guns/ak47.webp";
 function GuestLayout() {
     const { role } = useStateContext();
     const [settings, setSettings] = React.useState();
+    const [settingsLoading, setSettingsLoading] = React.useState(true);
     
     React.useEffect(() => {
         // axiosClient.get('/settings').then(res => {
@@ -30,9 +31,11 @@ function GuestLayout() {
             .then((res) => {
                 console.log(res);
                 setSettings(res.data.settings);
+                setSettingsLoading(false);
             })
             .catch((err) => {
                 console.log(err);
+                setSettingsLoading(false);
             });
     }, []);
 
@@ -44,14 +47,12 @@ function GuestLayout() {
         return <Navigate to={`${role}`} />
     }
 
-    console.log(settings);
-    
     return (
         <div className="bg-background text-textPrimary overflow-x-hidden bg[url('https://i.pinimg.com/1200x/fd/36/34/fd363452b137ba4f37585288f3b0d116.jpg')] bg-cover bg-center bg-fixed transition-all">
             <Navbar />
             <div className='min-h-[100svh] pt-[72px]'>
                 <Outlet context={{
-                    settings
+                    settings, settingsLoading
                 }} />
             </div>
             <Footer />

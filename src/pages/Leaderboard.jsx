@@ -56,7 +56,7 @@ export default function Leaderboard({ userType }) {
     const [leaderboard, setLeaderboard] = React.useState();
     const navigate = useNavigate();
     const [loading, setLoading] = React.useState(true);
-    const { settings } = useOutletContext();
+    const { settings, settingsLoading } = useOutletContext();
     const [users, setUsers] = React.useState();
     const [copied, setCopied] = React.useState(false);
 
@@ -80,14 +80,19 @@ export default function Leaderboard({ userType }) {
             setLoading(false);
         }
     }
+    
+    console.log(settingsLoading);
 
     React.useEffect(() => {
         window.scrollTo(0, 0);
-        settings?.is_active === 1 && fetchReferredUsers().catch(console.error);
-        if(settings?.is_active === 0){
+        if(settings?.is_active === 1){
+            fetchReferredUsers().catch(console.error);
+        } else if(settings?.is_active === 0){
+            setLoading(false);
+        } else if (!settingsLoading){
             setLoading(false);
         }
-    }, [settings]);
+    }, [settings, settingsLoading]);
 
     console.log("settings", settings);
     console.log("users", users);
@@ -118,7 +123,7 @@ export default function Leaderboard({ userType }) {
         )
     }
 
-    if(settings && settings?.is_active && !users && !loading){
+    if(settings && settings?.is_active && !users && !settingsLoading){
         return (
             <div className="p-6 min-h-[80svh] flex items-center justify-center">
                 <Card tcenter={1} title={
@@ -196,7 +201,7 @@ export default function Leaderboard({ userType }) {
                     <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-b from-transparent to-purple-800 opacity-40 pointer-events-none" />
                 </motion.div>
 
-                {settings?.is_active === 1 ? <>
+                
                     {settings?.first_prize && settings?.second_prize && settings?.third_prize && settings?.leaderboard_type && 
                     <motion.div
                         initial={{ y: 20, opacity: 0 }}
@@ -242,43 +247,6 @@ export default function Leaderboard({ userType }) {
                             <FaLink /> JOIN CSGOEMPIRE
                         </a>
                     </motion.div>}
-
-                    {(!users?.length || !users) && !loading && (
-                        <div className="mt-4">
-                            <Card tcenter={1} title={<span className="flex items-center gap-4"><BiSolidParty className="w-8 h-8 text-primary animate-pulse" /> Join the Excitement!</span>}>
-                                <div className="flex items-start gap-4">
-                                    <div className="mt-2">
-                                        <p className="text-sm mb-2">
-                                            The leaderboard hasn’t started yet — be among the first to play and earn rewards. Use referral code <span className="font-bold text-tertiary text-lg">{settings?.referral_code}</span> on <span className="font-semibold">CSGOEmpire</span> and start climbing your way to the top!
-                                        </p>
-
-                                        <div className="flex flex-col gap-1 text-sm mt-4">
-                                            <div className="flex items-center gap-2">
-                                                <FaClock className="w-4 h-4" />
-                                                <span className="font-medium text-nowrap">Start Now:</span>
-                                            </div>
-                                            <span className="text-textSecondary">The leaderboard is waiting for new participants. Don't miss your chance!</span>
-                                        </div>
-
-                                        <div className="flex flex-col gap-1 text-sm mt-4">
-                                            <div className="flex items-center gap-2">
-                                                <FaGift className="w-4 h-4" />
-                                                <span className="font-medium text-nowrap">Get Rewards:</span>
-                                            </div>
-                                            <span className="text-textSecondary">Play with the referral code and earn juicy bonuses, VIP perks, and more.</span>
-                                        </div>
-
-                                        <div className="mt-4 flex w-full justify-end">
-                                            <a href={`${settings?.referral_link}`} target="_blank" className='mt-2 w-fit justify-center bg-accent text-white font-[700] px-5 hover:opacity-90 transition text-[14px] rounded-md py-2 font-nunito flex items-center gap-1.5' style={{boxShadow: "rgba(0, 0, 0, 0.25) 0px -2px 0px inset, rgba(255, 255, 255, 0.25) 0px 1.5px 0px inset", padding: "0.5rem 1rem"}}>
-                                                <FaLink /> JOIN CSGOEMPIRE
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </Card>
-                        </div>
-                    )}
-
 
                     {/* Top 3 Section */}
                     {users?.length >= 1 && (
@@ -518,42 +486,6 @@ export default function Leaderboard({ userType }) {
                             </motion.div>
                         ))}
                     </div>}
-                </>
-                :
-                <div className="mt-4">
-                    {!loading && <Card tcenter={1} title={<span className="flex items-center gap-4"><FaPause className="w-8 h-8 text-tertiary animate-pulse" /> Leaderboard is Paused</span>}>
-                        <div className="flex items-start gap-4">
-                            <div className="mt-2">
-                                <p className="text-sm mb-2">
-                                    The <span className="font-semibold">Leaderboard</span> is currently paused. New information and updates will be announced soon.
-                                </p>
-
-                                <div className="flex flex-col gap-1 text-sm mt-4">
-                                    <div className="flex items-center gap-2">
-                                        <FaClock className="w-4 h-4" />
-                                        <span className="font-medium text-nowrap">Check Back Later:</span>
-                                    </div>
-                                    <span className="text-textSecondary">This leaderboard is not available at the moment.</span>
-                                </div>
-
-                                <div className="flex flex-col gap-1 text-sm mt-4">
-                                    <div className="flex items-center gap-2">
-                                        <FaGift className="w-4 h-4" />
-                                        <span className="font-medium text-nowrap">Stay Updated:</span>
-                                    </div>
-                                    <span className="text-textSecondary">Follow us on social media for announcements.</span>
-                                </div>
-
-                                <div className="mt-4 w-full flex justify-end">
-                                    <a href={`${settings?.referral_link}`} target="_blank" className='mt-2 w-fit justify-center bg-accent text-white font-[700] px-5 hover:opacity-90 transition text-[14px] rounded-md py-2 font-nunito flex items-center gap-1.5' style={{boxShadow: "rgba(0, 0, 0, 0.25) 0px -2px 0px inset, rgba(255, 255, 255, 0.25) 0px 1.5px 0px inset", padding: "0.5rem 1rem"}}>
-                                        <FaLink /> JOIN CSGOEMPIRE
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </Card>}
-                </div>
-                }
 
                 <LeaderboardHistory />
             </div>

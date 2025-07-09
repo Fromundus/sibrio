@@ -26,8 +26,8 @@ export default function AdminSiteSettings() {
     }, []);
     
     // console.log(settings);
-    console.log("users", users);
-    console.log("leaderboard", leaderboard);
+    // console.log("users", users);
+    // console.log("leaderboard", leaderboard);
 
     const [cookie, setCookie] = useState("");
     const [cookieErrors, setCookieErrors] = useState("");
@@ -192,6 +192,8 @@ export default function AdminSiteSettings() {
         document.body.classList.remove('no-scroll');
         setDeclareModal(false);
     }
+
+    console.log(form);
 
     return (
         <Page>

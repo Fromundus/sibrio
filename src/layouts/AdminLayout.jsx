@@ -7,15 +7,17 @@ import axiosClient from '../axios-client';
 import { Bounce, ToastContainer } from 'react-toastify';
 
 function AdminLayout() {
-    const [settingsLoading, setSettingsLoading] = React.useState(false);
+    const [settingsLoading, setSettingsLoading] = React.useState(true);
     const [leaderboard, setLeaderboard] = React.useState({});
     const [settings, setSettings] = React.useState({
         referral_code: '',
         referral_link: '',
         leaderboard_type: '',
-        prize: '',
+        first_prize: '',
+        second_prize: '',
+        third_prize: '',
         terms: '',
-        is_active: '',
+        is_active: true,
     });
     
     React.useEffect(() => {

@@ -41,6 +41,7 @@ function Login() {
 
         axiosClient.post("/login", data)
             .then( ({data}) => {
+                console.log(data);
                 if(data.message === "Invalid Credentials"){
                     setErrors(data.message);
                 } else if (data.message === "Pending Account"){
@@ -56,7 +57,7 @@ function Login() {
                 setIsloading(false);
             })
             .catch( (err) => {
-                // console.log(err)
+                console.log(err)
                 if(err.response.status === 422){
                     setErrors("Invalid Credentials")
                 }
@@ -102,8 +103,9 @@ function Login() {
         //     </div>
         // </div>
         <Page>
-            <Card title={"Admin Login"} tcenter={1} className={"mt-20"}>
+            <Card title={"Admin Login"} tcenter={1} className={"mt-20"} maxW={"max-w-md"}>
                 <Form onSubmit={handleSubmit}>
+                    {errors && <span className='text-center bg-red-400 p-1.5 rounded text-white font-semibold mb-2'>{errors}</span>}
                      <Input 
                          id="email"
                          type={"email"}

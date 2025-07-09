@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import csgoempirelogo from "../assets/csgoempirelogo.png";
-import { FaCoins, FaGift, FaInfo, FaPause, FaRegCopy } from "react-icons/fa";
+import { FaCoins, FaGift, FaInfo, FaPause, FaPlay, FaRegCopy } from "react-icons/fa";
 import { FaBell, FaCheck, FaClock, FaLink } from "react-icons/fa6";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { IoAlertCircle } from "react-icons/io5";
@@ -76,7 +76,7 @@ export default function Leaderboard({ userType }) {
             setLoading(false);
         } catch(err){
             console.log(err)
-            setUsers(hardUsers);
+            // setUsers(hardUsers);
             setLoading(false);
         }
     }
@@ -89,7 +89,97 @@ export default function Leaderboard({ userType }) {
         }
     }, [settings]);
 
-    console.log(users);
+    console.log("settings", settings);
+    console.log("users", users);
+
+    if(loading){
+        return (
+            <div className="p-6 min-h-[80svh] flex items-center justify-center">
+                <span className="font-semibold">LOADING...</span>
+            </div>
+        )
+    }
+
+    if(!settings && !loading){
+        return (
+            <div className="p-6 min-h-[80svh] flex items-center justify-center">
+                <Card tcenter={1} title={
+                    <span className="flex flex-col md:flex-row lg:flex-row items-center gap-4">
+                        <BiSolidParty className="w-8 h-8 text-yellow-500 animate-bounce" />
+                        <span>Leaderboard Not Yet Ready</span>
+                    </span>
+                }>
+                    <div className="text-sm text-white mt-2 text-center">
+                        <p className="mb-3">We're setting things up!</p>
+                        <p className="text-textSecondary">Leaderboard settings haven’t been configured yet. Please check back later for referral codes and rewards!</p>
+                    </div>
+                </Card>
+            </div>
+        )
+    }
+
+    if(settings && settings?.is_active && !users && !loading){
+        return (
+            <div className="p-6 min-h-[80svh] flex items-center justify-center">
+                <Card tcenter={1} title={
+                    <span className="flex flex-col md:flex-row lg:flex-row items-center gap-4">
+                        <FaPlay className="w-8 h-8 text-yellow-500 animate-bounce" />
+                        <span>No Players Yet</span>
+                    </span>
+                }>
+                    <div className="text-sm text-white mt-2 text-center">
+                        <p className="mb-3">Be the first to join the leaderboard!</p>
+                        <p className="text-textSecondary">
+                            No one has joined yet — this is your chance to grab an early lead and earn rewards. Use the referral code and start wagering on <span className="font-semibold">CSGOEmpire</span> today!
+                        </p>
+
+                        <div className="flex flex-col md:flex-row lg:flex-row items-center max-w-md mx-auto mt-4 gap-2">
+                            <Button
+                                className={"bg-primary text-white w-full flex justify-center"}
+                                label={<span className="flex items-center gap-2 uppercase">CODE: {settings?.referral_code} {!copied ? <FaRegCopy /> : <FaCheck className="text-green-200" />}</span>}
+                                onClick={handleCopy}
+                            />
+                            <a href={`${settings?.referral_link}`} target="_blank" className='w-full h-11 justify-center bg-accent text-white font-[700] px-5 hover:opacity-90 transition text-[14px] rounded-md py-2 font-nunito flex items-center gap-1.5' style={{boxShadow: "rgba(0, 0, 0, 0.25) 0px -2px 0px inset, rgba(255, 255, 255, 0.25) 0px 1.5px 0px inset", padding: "0.5rem 1rem"}}>
+                                <FaLink /> JOIN CSGOEMPIRE
+                            </a>
+                        </div>
+                    </div>
+                </Card>
+            </div>
+        )
+    }
+
+    if(settings && !settings?.is_active && !loading){
+        return (
+            <div className="p-6 min-h-[80svh] flex flex-col items-center justify-center">
+                <Card tcenter={1} title={
+                    <span className="flex flex-col md:flex-row lg:flex-row items-center gap-4">
+                        <FaPause className="w-8 h-8 text-yellow-500 animate-bounce" />
+                        <span>Leaderboard Paused</span>
+                    </span>
+                }>
+                    <div className="text-sm text-white mt-2 text-center">
+                        <p className="mb-3">Leaderboard is temporarily paused.</p>
+                        <p className="text-textSecondary">
+                            We’re making improvements behind the scenes. Please check back soon for updates, new prizes, and the next chance to climb the ranks!
+                        </p>
+
+                        <div className="flex flex-col md:flex-row lg:flex-row items-center max-w-md mx-auto mt-4 gap-2">
+                            <Button
+                                className={"bg-primary text-white w-full flex justify-center"}
+                                label={<span className="flex items-center gap-2 uppercase">CODE: {settings?.referral_code} {!copied ? <FaRegCopy /> : <FaCheck className="text-green-200" />}</span>}
+                                onClick={handleCopy}
+                            />
+                            <a href={`${settings?.referral_link}`} target="_blank" className='w-full h-11 justify-center bg-accent text-white font-[700] px-5 hover:opacity-90 transition text-[14px] rounded-md py-2 font-nunito flex items-center gap-1.5' style={{boxShadow: "rgba(0, 0, 0, 0.25) 0px -2px 0px inset, rgba(255, 255, 255, 0.25) 0px 1.5px 0px inset", padding: "0.5rem 1rem"}}>
+                                <FaLink /> JOIN CSGOEMPIRE
+                            </a>
+                        </div>
+                    </div>
+                </Card>
+                <LeaderboardHistory />
+            </div>
+        )
+    }
 
     return (
         <div className="p-6 bg-gradient-to-b from-background via-surface to-background min-h-[100svh]">

@@ -19,20 +19,21 @@ import ak47 from "../assets/guns/ak47.webp";
 
 function GuestLayout() {
     const { role } = useStateContext();
-    const [settings, setSettings] = React.useState({
-        referral_code: '',
-        referral_link: '',
-        leaderboard_type: '',
-        prize: '',
-        terms: '',
-        is_active: '',
-    });
+    const [settings, setSettings] = React.useState();
     
     React.useEffect(() => {
-        axiosClient.get('/settings').then(res => {
-            console.log(res);
-            setSettings(res.data.settings);
-        });
+        // axiosClient.get('/settings').then(res => {
+        //     console.log(res);
+        //     setSettings(res.data.settings);
+        // });
+        axiosClient.get('/settings')
+            .then((res) => {
+                console.log(res);
+                setSettings(res.data.settings);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }, []);
 
     React.useEffect( () => {

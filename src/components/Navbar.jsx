@@ -17,7 +17,7 @@ const Navbar = ({ userType }) => {
     <>
       <nav className='fixed top-0 left-0 w-full p-4 transition-all duration-[1s] backdrop-blur-sm' style={{zIndex: 1000}}>
         <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-3 items-center h-[40px]'>
-          <a href='/' className='text-xl font-extrabold text-primary'>
+          <a href='/' className='text-xl font-extrabold text-primary w-fit'>
               Sibrio
           </a>
           <div className='hidden sm:flex md:flex lg:flex items-center gap-6 w-full justify-center'>

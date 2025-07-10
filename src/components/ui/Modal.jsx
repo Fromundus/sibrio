@@ -19,7 +19,7 @@ function Modal({title, onClose, loading, children }) {
                 <div className='flex items-center justify-center w-full relative p-6 border-b border-border'>
                     <span className='font-semibold text-lg'>{title}</span>
                     <button
-                        className="absolute right-4 p-2 border border-border rounded-lg"
+                        className="absolute right-4 p-2 border border-border rounded-lg hover:bg-background"
                         onClick={onClose}
                         disabled={loading}
                     >

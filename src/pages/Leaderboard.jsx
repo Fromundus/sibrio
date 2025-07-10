@@ -13,6 +13,7 @@ import lbtext from "../assets/lbtext.webp"
 import coins from "../assets/coins.png"
 import { format, formatDistanceToNow } from "date-fns";
 import LeaderboardHistory from "../components/LeaderboardHistory";
+import { IoSettingsSharp } from "react-icons/io5";
 
 const hardUsers = [
     { 
@@ -110,7 +111,7 @@ export default function Leaderboard({ userType }) {
             <div className="p-6 min-h-[80svh] flex items-center justify-center">
                 <Card tcenter={1} title={
                     <span className="flex flex-col md:flex-row lg:flex-row items-center gap-4">
-                        <BiSolidParty className="w-8 h-8 text-yellow-500 animate-bounce" />
+                        <IoSettingsSharp className="w-8 h-8 text-yellow-500 animate-spin" />
                         <span>Leaderboard Not Yet Ready</span>
                     </span>
                 }>

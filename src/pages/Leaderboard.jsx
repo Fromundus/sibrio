@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import csgoempirelogo from "../assets/csgoempirelogo.png";
 import { FaCoins, FaGift, FaInfo, FaPause, FaPlay, FaRegCopy } from "react-icons/fa";
 import { FaBell, FaCheck, FaClock, FaLink } from "react-icons/fa6";
@@ -14,6 +13,7 @@ import coins from "../assets/coins.png"
 import { format, formatDistanceToNow } from "date-fns";
 import LeaderboardHistory from "../components/LeaderboardHistory";
 import { IoSettingsSharp } from "react-icons/io5";
+import axiosClient from "../axios-client";
 
 const hardUsers = [
     { 
@@ -70,7 +70,7 @@ export default function Leaderboard({ userType }) {
     
     async function fetchReferredUsers() {
         try {
-            const res = await axios.get('/leaderboard');
+            const res = await axiosClient.get('leaderboard');
             console.log("res",res);
             setUsers(res.data.data);
             setLeaderboard(res.data.leaderboard);

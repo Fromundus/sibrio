@@ -70,7 +70,7 @@ export default function Leaderboard({ userType }) {
     
     async function fetchReferredUsers() {
         try {
-            const res = await axios.get('http://localhost:8000/api/leaderboard');
+            const res = await axios.get('/leaderboard');
             console.log("res",res);
             setUsers(res.data.data);
             setLeaderboard(res.data.leaderboard);

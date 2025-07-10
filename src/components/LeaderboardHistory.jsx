@@ -30,7 +30,7 @@ const LeaderboardHistory = () => {
     return (
       <div key={idx} className="flex flex-col rounded-2xl items-center flex-shrink-0 border-2 border-b-0 rounded-es-none rounded-ee-none border-pink-300 bg-gradient-to-b from-pink-900 to-transparent bg-opacity-50 hover:scale-105 transition-all">
           <div className='border-b border-pink-700 w-full py-2 px-4 flex justify-end'>
-            <span className='uppercase font-medium text-xs'>{format(item?.created_at, "MMMM d, yyyy")}</span>
+            <span className='uppercase font-medium text-xs'>{format(item?.created_at, "MMMM d, yyyy | hh:mm:a")}</span>
           </div>
           <div className='py-4 px-14'>
             <div className="relative flex w-full items-center justify-center">

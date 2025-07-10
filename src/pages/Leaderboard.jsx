@@ -14,6 +14,7 @@ import { format, formatDistanceToNow } from "date-fns";
 import LeaderboardHistory from "../components/LeaderboardHistory";
 import { IoSettingsSharp } from "react-icons/io5";
 import axiosClient from "../axios-client";
+import CountdownTimer from "../components/CountdownTimer";
 
 const hardUsers = [
     { 
@@ -203,13 +204,13 @@ export default function Leaderboard({ userType }) {
                 </motion.div>
 
                 
-                    {settings?.first_prize && settings?.second_prize && settings?.third_prize && settings?.leaderboard_type && 
+                    {settings?.first_prize && settings?.second_prize && settings?.third_prize && 
                     <motion.div
                         initial={{ y: 20, opacity: 0 }}
                         whileInView={{ y: 0, opacity: 1 }}
                         transition={{ duration: 1, ease: "easeOut" }}
                         className="z-50 mt-4">
-                        <h1 className="text-2xl text-[#ed9c07] font-extrabold flex items-center gap-2"><div><img className="max-w-sm w-8" src={coins} alt="" /></div> {Number(settings?.first_prize) + Number(settings?.second_prize) + Number(settings?.third_prize)} <span className="text-white uppercase">{settings?.leaderboard_type}</span></h1>
+                        <h1 className="text-2xl text-[#ed9c07] font-extrabold flex items-center gap-2"><div><img className="max-w-sm w-8" src={coins} alt="" /></div> {Number(settings?.first_prize) + Number(settings?.second_prize) + Number(settings?.third_prize)} <span className="text-white uppercase">Every End Season</span></h1>
                     </motion.div>}
 
                     <motion.div 
@@ -221,17 +222,17 @@ export default function Leaderboard({ userType }) {
                         {/* <h1 className="text-4xl lg:text-6xl text-white font-extrabold italic">LEADERBOARD</h1> */}
                         <img className="max-w-md w-full" src={lbtext} alt="" />
                     </motion.div>
-                    
-                    {leaderboard?.created_at && 
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        transition={{ duration: 1, ease: "backInOut" }}
-                        className="flex items-center gap-2 text-sm py-2"
-                    >
-                        <span className="font-bold uppercase text-textSecondary">UPDATED {formatDistanceToNow(leaderboard?.created_at, { addSuffix: true })}</span>
-                    </motion.div>}
 
+                    {settings?.leaderboard_ends_at &&
+                    <motion.div 
+                        className="my-2"
+                        initial={{ y: 20, opacity: 0 }}
+                        whileInView={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 1, ease: "easeOut" }}
+                    >
+                        <CountdownTimer targetDate={settings?.leaderboard_ends_at} />
+                    </motion.div>}
+                    
                     {!userType && settings?.referral_code && settings?.referral_link && 
                     <motion.div 
                         initial={{ y: 20, opacity: 0 }}
@@ -247,6 +248,16 @@ export default function Leaderboard({ userType }) {
                         <a href={`${settings?.referral_link}`} target="_blank" className='w-full h-11 justify-center bg-accent text-white font-[700] px-5 hover:opacity-90 transition text-[14px] rounded-md py-2 font-nunito flex items-center gap-1.5' style={{boxShadow: "rgba(0, 0, 0, 0.25) 0px -2px 0px inset, rgba(255, 255, 255, 0.25) 0px 1.5px 0px inset", padding: "0.5rem 1rem"}}>
                             <FaLink /> JOIN CSGOEMPIRE
                         </a>
+                    </motion.div>}
+
+                    {leaderboard?.created_at && 
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ duration: 1, ease: "backInOut" }}
+                        className="flex items-center gap-2 text-sm py-2"
+                    >
+                        <span className="font-semibold uppercase text-textSecondary">UPDATED {formatDistanceToNow(leaderboard?.created_at, { addSuffix: true })}</span>
                     </motion.div>}
 
                     {/* Top 3 Section */}

@@ -15,7 +15,6 @@ import Modal from '../components/ui/Modal';
 import { FaCoins } from 'react-icons/fa6';
 import { motion } from 'framer-motion';
 import { IoIosHelpCircle } from "react-icons/io";
-import { BiSolidParty } from 'react-icons/bi';
 
 export default function AdminSiteSettings() {
     const { settings, setSettings, settingsLoading, leaderboard, setLeaderboard} = useOutletContext();
@@ -23,6 +22,7 @@ export default function AdminSiteSettings() {
     const [declareModal, setDeclareModal] = React.useState(false);
     const [users, setUsers] = React.useState([]);
     const [helpModal, setHelpModal] = React.useState(false);
+    const [topThree, setTopThree] = React.useState([]);
 
     React.useEffect(() => {
         window.scrollTo(0, 0);
@@ -38,22 +38,24 @@ export default function AdminSiteSettings() {
     const [form, setForm] = useState({
         referral_code: '',
         referral_link: '',
-        leaderboard_type: '',
+        // leaderboard_type: '',
         first_prize: '',
         second_prize: '',
         third_prize: '',
         terms: '',
+        leaderboard_ends_at: '',
         is_active: true,
     });
 
     const [errors, setErrors] = useState({
         referral_code: '',
         referral_link: '',
-        leaderboard_type: '',
+        // leaderboard_type: '',
         first_prize: '',
         second_prize: '',
         third_prize: '',
         terms: '',
+        leaderboard_ends_at: '',
         is_active: '',
     });
     
@@ -145,6 +147,7 @@ export default function AdminSiteSettings() {
             setLoading(false);
             setLeaderboard(res.data.leaderboard);
             setUsers(res.data.leaderboard.referred_users);
+            setTopThree(res.data.top_three);
             notify(res.data.message);
             
             if(res.data.message === "Cookie Expired"){
@@ -207,6 +210,7 @@ export default function AdminSiteSettings() {
     }
 
     console.log("settings", settings);
+    console.log("topThree", topThree);
 
     return (
         <Page>
@@ -281,7 +285,7 @@ export default function AdminSiteSettings() {
                         error={errors.referral_link}
                     />
 
-                    <Select
+                    {/* <Select
                         id={"leaderboard_type"}
                         name={"leaderboard_type"}
                         onChange={handleChange}
@@ -291,7 +295,7 @@ export default function AdminSiteSettings() {
                         error={errors.leaderboard_type}
                         options={options}
                         defaultOption={{value: "", name: "Please Select a type"}}
-                    />
+                    /> */}
 
                     <Input
                         type={"number"}
@@ -326,6 +330,17 @@ export default function AdminSiteSettings() {
                         error={errors.third_prize}
                     />
 
+                    <Input
+                        type={"datetime-local"}
+                        id={"leaderboard_ends_at"}
+                        name={"leaderboard_ends_at"}
+                        onChange={handleChange}
+                        value={form?.leaderboard_ends_at}
+                        placeholder={"Leaderboard Ends At"}
+                        disabled={loading || settingsLoading}
+                        error={errors.leaderboard_ends_at}
+                    />
+
                     <Textarea
                         id={"terms"}
                         name={"terms"}
@@ -353,32 +368,34 @@ export default function AdminSiteSettings() {
                         
             {declareModal && 
             <Modal title={"Declare Winners"} onClose={handleCloseDeclareModal}>
-                {users?.splice(0, 3).map((user, index) => (
-                    <motion.div
-                        initial={{ x: 50, opacity: 0 }}
-                        whileInView={{ x: 0, opacity: 1 }}
-                        transition={{ duration: 0.6, ease: "easeOut" }}
-                        key={user?.name}
-                        className="flex items-center justify-between bg-gray-900 bg-opacity-80 px-4 py-2 rounded-lg shadow border border-gray-700"
-                    >
-                        <div className="flex items-center">
-                            <span className="text-lg font-bold w-6 text-center mr-4 text-white">
-                                {index + 1}
-                            </span>
-                            <img
-                                src={user?.avatar}
-                                alt={user?.name}
-                                className="w-10 h-10 rounded-full mr-4 border-2 border-gray-700"
-                            />
-                            <span className="font-medium text-white">{user?.name}</span>
-                        </div>
-                        <div className={`py-1 px-2 rounded-xl flex flex-col items-center`}>
-                            <div className="flex items-center gap-2">
-                                <FaCoins className="text-[#ed9c07]" /> {Number(user?.total_wagered).toFixed(2)}
+                <div className='flex flex-col gap-2'>
+                    {topThree?.map((user, index) => (
+                        <motion.div
+                            initial={{ x: 50, opacity: 0 }}
+                            whileInView={{ x: 0, opacity: 1 }}
+                            transition={{ duration: 0.6, ease: "easeOut" }}
+                            key={user?.name}
+                            className="flex items-center justify-between bg-gray-900 bg-opacity-80 px-4 py-2 rounded-lg shadow border border-gray-700"
+                        >
+                            <div className="flex items-center">
+                                <span className="text-lg font-bold w-6 text-center mr-4 text-white">
+                                    {index + 1}
+                                </span>
+                                <img
+                                    src={user?.avatar}
+                                    alt={user?.name}
+                                    className="w-10 h-10 rounded-full mr-4 border-2 border-gray-700"
+                                />
+                                <span className="font-medium text-white">{user?.name}</span>
                             </div>
-                        </div>
-                    </motion.div>
-                ))}
+                            <div className={`py-1 px-2 rounded-xl flex flex-col items-center`}>
+                                <div className="flex items-center gap-2">
+                                    <FaCoins className="text-[#ed9c07]" /> {Number(user?.total_wagered * 0.01).toFixed(2)}
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
 
                 <Button
                     loading={loading}

@@ -21,7 +21,7 @@ export function ContextProvider({children}){
                 const res = await axiosClient.get('/user')
                 console.log(res);
                 if(res.status === 200){
-                    setName(res.data.name);
+                    setName(res.data.username);
                     setEmail(res.data.email);
                     setRole(res.data.role);
                     setId(res.data.id);

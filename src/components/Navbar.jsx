@@ -36,6 +36,13 @@ const Navbar = ({ userType }) => {
             >
                 LEADERBOARDS
             </NavLink>
+            {userType && <NavLink to={'/admin/account'}
+              className={({isActive}) => 
+                `font-extrabold ${isActive ? "text-primary" : "text-white"}`
+              }
+            >
+                ACCOUNT
+            </NavLink>}
           </div>
           <div className='hidden sm:flex md:flex lg:flex justify-end'>
               {!userType && <Button 
@@ -85,6 +92,14 @@ const Navbar = ({ userType }) => {
             >
                 LEADERBOARDS
             </NavLink>
+            {userType && <NavLink to={'/admin/account'}
+              className={({isActive}) => 
+                `font-extrabold ${isActive ? "text-primary" : "text-white"}`
+              }
+              onClick={dropDownToggle}
+            >
+                ACCOUNT
+            </NavLink>}
           </div>
       </div>}
     </>

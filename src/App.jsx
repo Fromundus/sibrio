@@ -11,6 +11,7 @@ import RequireAuthentication from './components/RequireAuthentication';
 import AdminLayout from './layouts/AdminLayout';
 import Login from './pages/Login';
 import AdminSiteSettings from './pages/AdminSiteSettings';
+import AdminAccountSettings from './pages/AdminAccountSettings';
 
 const roles = {
     admin: "admin",
@@ -30,6 +31,7 @@ const router = createBrowserRouter(createRoutesFromElements(
                 {/* <Route index element={<Home />} /> */}
                 <Route index element={<AdminSiteSettings />} />
                 <Route path='leaderboards' element={<Leaderboard userType={1} />} />
+                <Route path='account' element={<AdminAccountSettings userType={1} />} />
             </Route>
         </Route>
 

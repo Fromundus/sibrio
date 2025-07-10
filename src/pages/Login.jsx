@@ -15,7 +15,7 @@ function Login() {
     const [isLoading, setIsloading] = React.useState(false);
     const { setToken, setRole, setName, setId } = useStateContext();
     const [data, setData] = React.useState({
-        email: "",
+        username: "",
         password: "",
     });
 
@@ -74,13 +74,13 @@ function Login() {
                 <Form onSubmit={handleSubmit}>
                     {errors && <span className='text-center bg-red-400 p-1.5 rounded text-white font-semibold mb-2'>{errors}</span>}
                      <Input 
-                         id="email"
-                         type={"email"}
-                         name={"email"}
-                         placeholder={"email"}
+                         id="username"
+                         type={"text"}
+                         name={"username"}
+                         placeholder={"username"}
                          onChange={handleChange}
-                         value={data.email}
-                         error={errors.email}
+                         value={data.username}
+                         error={errors.username}
                      />
 
                      <Input 
@@ -97,7 +97,7 @@ function Login() {
                          label={"Login"}
                          className={"bg-primary text-white flex justify-center"}
                          type={"submit"}
-                         disabled={data.email.length === 0 || data.password.length === 0 || isLoading}
+                         disabled={data.username.length === 0 || data.password.length === 0 || isLoading}
                          loading={isLoading}
                      />
                 </Form>

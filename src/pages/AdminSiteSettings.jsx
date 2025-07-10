@@ -253,7 +253,7 @@ export default function AdminSiteSettings() {
             </Card>
             :
             !settingsLoading && !settings &&
-            <Card tcenter={1} title={"Set Up the Leaderboard First."}>
+            <Card tcenter={1} title={"Set Up the Website Settings First."}>
                 <div className="text-sm text-white mt-2 text-center">
                     <p className="text-textSecondary">Please set up the website settings to access the leaderboard settings.</p>
                 </div>

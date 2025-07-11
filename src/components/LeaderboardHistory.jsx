@@ -67,7 +67,7 @@ const LeaderboardHistory = () => {
         {history?.length === 0 ? 
           <span className="text-textSecondary">No leaderboards history yet.</span>
           :
-          <div className='flex flex-wrap gap-4 justify-center mt-8'>
+          <div className='flex flex-wrap gap-10 justify-center mt-8'>
             {renderHistory}
           </div>
         }

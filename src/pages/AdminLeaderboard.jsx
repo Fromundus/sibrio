@@ -29,9 +29,17 @@ const AdminLeaderboard = () => {
       fetchLeaderboard();
     }, [id]);
 
+    if(!leaderboard && !loading){
+      return (
+        <div>
+          <span>Leaderboard Not Found</span>
+        </div>
+      )
+    }
+
     return (
       <Page className={"flex flex-col gap-8 w-full"}>
-        {leaderboard.status === "active" && <AdminUpdateLeaderboardPlayers leaderboard={leaderboard} setLeaderboard={setLeaderboard} users={users} setUsers={setUsers} />}
+        {leaderboard?.status === "active" && <AdminUpdateLeaderboardPlayers leaderboard={leaderboard} setLeaderboard={setLeaderboard} users={users} setUsers={setUsers} />}
         <RenderLeaderboard leaderboard={leaderboard} users={users} loading={loading} settings={settings} settingsLoading={settingsLoading} />
       </Page>
     )

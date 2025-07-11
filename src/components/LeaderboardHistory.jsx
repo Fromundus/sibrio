@@ -48,12 +48,6 @@ const LeaderboardHistory = () => {
                 </div>
                 <span className="text-xs text-textSecondary">TOTAL PRIZE POOL</span>
             </div>
-            {/* <div className="py-1 px-2 rounded-xl font-semibold mt-2 flex flex-col items-center">
-                <div className="flex items-center gap-2 text-lg font-bold">
-                    <img className="w-4" src={coins} alt="" /> {Number(settings?.first_prize).toFixed(2)}
-                </div>
-                <span className="text-xs text-textSecondary">PRICE</span>
-            </div> */}
           </div>
       </div>
     )
@@ -64,14 +58,14 @@ const LeaderboardHistory = () => {
         initial={{ y: 20, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="z-50 mt-8 text-center flex flex-col gap-2 pt-8 pb-10 items-center"
+        className="z-50 text-center flex flex-col gap-2 items-center py-10"
     >
-        <h1 className="text-2xl text-white font-extrabold flex items-center gap-2 mb-4">LEADERBOARD <span className='text-primary'>HISTORY</span></h1>
+        <h1 className="text-2xl text-white font-extrabold flex items-center gap-2">LEADERBOARD <span className='text-primary'>HISTORY</span></h1>
 
         {history?.length === 0 ? 
           <span className="text-textSecondary">No leaderboards history yet.</span>
           :
-          <div className='flex flex-wrap gap-4 justify-center'>
+          <div className='flex flex-wrap gap-4 justify-center mt-4'>
             {renderHistory}
           </div>
         }

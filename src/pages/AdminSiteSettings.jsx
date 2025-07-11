@@ -38,25 +38,11 @@ export default function AdminSiteSettings() {
     const [form, setForm] = useState({
         referral_code: '',
         referral_link: '',
-        // leaderboard_type: '',
-        first_prize: '',
-        second_prize: '',
-        third_prize: '',
-        terms: '',
-        leaderboard_ends_at: '',
-        is_active: true,
     });
 
     const [errors, setErrors] = useState({
         referral_code: '',
         referral_link: '',
-        // leaderboard_type: '',
-        first_prize: '',
-        second_prize: '',
-        third_prize: '',
-        terms: '',
-        leaderboard_ends_at: '',
-        is_active: '',
     });
     
     const notify = (message) => toast(message);
@@ -214,7 +200,7 @@ export default function AdminSiteSettings() {
 
     return (
         <Page>
-            {settings && !settingsLoading ? <Card title={
+            {/* {settings && !settingsLoading ? <Card title={
                 <div className='w-full flex justify-between items-center'>
                     <span>Leaderboard Settings</span>
                     {(!leaderboard?.created_at || leaderboard?.cookie_status !== "active") && <button className='text-sm font-normal flex items-center gap-1 border rounded-lg px-4 p-1.5 border-border hover:bg-background' onClick={handleOpenHelpModal}>Help <IoIosHelpCircle className='text-lg' /></button>}
@@ -262,8 +248,8 @@ export default function AdminSiteSettings() {
                     <p className="text-textSecondary">Please set up the website settings to access the leaderboard settings.</p>
                 </div>
             </Card>
-            }
-            <Card className={"mt-4"} title={"Website Settings"}>
+            } */}
+            <Card title={"Website Settings"}>
                 <Form onSubmit={handleSubmit}>
                     <Input
                         id={"referral_code"}
@@ -285,19 +271,7 @@ export default function AdminSiteSettings() {
                         error={errors.referral_link}
                     />
 
-                    {/* <Select
-                        id={"leaderboard_type"}
-                        name={"leaderboard_type"}
-                        onChange={handleChange}
-                        value={form?.leaderboard_type}
-                        placeholder={"Leaderboard Type"}
-                        disabled={loading || settingsLoading}
-                        error={errors.leaderboard_type}
-                        options={options}
-                        defaultOption={{value: "", name: "Please Select a type"}}
-                    /> */}
-
-                    <Input
+                    {/* <Input
                         type={"number"}
                         id={"first_prize"}
                         name={"first_prize"}
@@ -341,20 +315,10 @@ export default function AdminSiteSettings() {
                         error={errors.leaderboard_ends_at}
                     />
 
-                    <Textarea
-                        id={"terms"}
-                        name={"terms"}
-                        onChange={handleChange}
-                        value={form?.terms}
-                        placeholder={"Terms & Conditions"}
-                        disabled={loading || settingsLoading}
-                        error={errors.terms}
-                    />
-
                     <label className="flex items-center gap-2 mb-4">
                         <input type="checkbox" className='rounded h-5 w-5' name="is_active" checked={form?.is_active} onChange={handleChange} />
                         Enable Leaderboard
-                    </label>
+                    </label> */}
 
                     <Button
                         loading={loading}

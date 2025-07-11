@@ -12,12 +12,6 @@ function AdminLayout() {
     const [settings, setSettings] = React.useState({
         referral_code: '',
         referral_link: '',
-        leaderboard_type: '',
-        first_prize: '',
-        second_prize: '',
-        third_prize: '',
-        terms: '',
-        is_active: true,
     });
     
     React.useEffect(() => {

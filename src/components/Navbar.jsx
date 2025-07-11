@@ -20,7 +20,7 @@ const Navbar = ({ userType }) => {
           <a href='/' className='text-xl font-extrabold text-primary w-fit'>
               Sibrio
           </a>
-          <div className='hidden sm:flex md:flex lg:flex items-center gap-6 w-full justify-center'>
+          <div className='hidden sm:flex md:flex lg:flex items-center gap-6 w-full justify-center z-50'>
             <NavLink to={userType ? '/admin' : '/'}
               end
               className={({isActive}) => 

@@ -16,44 +16,6 @@ import { IoSettingsSharp } from "react-icons/io5";
 import axiosClient from "../axios-client";
 import CountdownTimer from "../components/CountdownTimer";
 
-const hardUsers = [
-    { 
-    name: "John", 
-    total_wagered: 1200,
-    avatar: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-    },
-    { 
-    name: "Alice", 
-    total_wagered: 980,
-    avatar: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-    },
-    { 
-    name: "Bob", 
-    total_wagered: 910,
-    avatar: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-    },
-    { 
-    name: "Charlie", 
-    total_wagered: 890,
-    avatar: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-    },
-    { 
-    name: "David", 
-    total_wagered: 850,
-    avatar: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-    },
-    { 
-    name: "Eva", 
-    total_wagered: 820,
-    avatar: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-    },
-    { 
-    name: "Frank", 
-    total_wagered: 800,
-    avatar: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-    },
-];
-
 export default function Leaderboard({ userType }) {
     const [leaderboard, setLeaderboard] = React.useState();
     const navigate = useNavigate();

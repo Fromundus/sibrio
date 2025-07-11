@@ -27,11 +27,11 @@ const AdminLeaderboard = () => {
 
     React.useEffect(() => {
       fetchLeaderboard();
-    }, []);
+    }, [id]);
 
     return (
       <Page className={"flex flex-col gap-8 w-full"}>
-        <AdminUpdateLeaderboardPlayers leaderboard={leaderboard} setLeaderboard={setLeaderboard} users={users} setUsers={setUsers} />
+        {leaderboard.status === "active" && <AdminUpdateLeaderboardPlayers leaderboard={leaderboard} setLeaderboard={setLeaderboard} users={users} setUsers={setUsers} />}
         <RenderLeaderboard leaderboard={leaderboard} users={users} loading={loading} settings={settings} settingsLoading={settingsLoading} />
       </Page>
     )

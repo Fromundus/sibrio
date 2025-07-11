@@ -10,7 +10,7 @@ import notify from '../lib/notify';
 import Form from './ui/Form';
 import Input from './ui/Input';
 
-const LeaderboardCard = ({ item, setLeaderboards }) => {
+const LeaderboardCard = ({ item, setLeaderboards, view }) => {
     const navigate = useNavigate();
     const [loading, setLoading] = React.useState(false);
     const [editModal, setEditModal] = React.useState(false);
@@ -78,7 +78,9 @@ const LeaderboardCard = ({ item, setLeaderboards }) => {
 
                 <div className='border-b border-purple-700 w-full p-4 flex justify-end'>
                     {/* <span className='uppercase font-medium text-xs'>{format(item?.created_at, "MMMM d, yyyy | hh:mm:a")}</span> */}
-                    <span className='uppercase font-bold text-xs bg-green-500 py-1 px-2 rounded-full'>{item.status}</span>
+                    {item.status === "active" && <span className='uppercase font-bold text-xs bg-green-500 py-1 px-2 rounded-full'>{item.status}</span>}
+                    {item.status === "ended" && <span className='uppercase font-bold text-xs bg-red-500 py-1 px-2 rounded-full'>{item.status}</span>}
+                    {item.status === "paused" && <span className='uppercase font-bold text-xs bg-gray-500 py-1 px-2 rounded-full'>{item.status}</span>}
                 </div>
                 <div className='flex justify-center items-center flex-col w-[300px] pb-4'>
                     <p className="mt-8 font-semibold text-lg">{item.name}</p>
@@ -127,18 +129,18 @@ const LeaderboardCard = ({ item, setLeaderboards }) => {
                         </div>}
                     </div>
                 </div>
-                <span className='font-semibold uppercase text-textSecondary'>Ends {formatDistanceToNow(item.leaderboard_ends_at, {addSuffix: true})}</span>
+                {item.status === "active" || item.status === "ended" && <span className='font-semibold uppercase text-textSecondary'>{item.status === "ended" ? "Ended" : "Ends"} {formatDistanceToNow(item.leaderboard_ends_at, {addSuffix: true})}</span>}
                 <div className='w-full p-4 flex gap-2 items-center'>
-                    <Button
+                    {item.status === "active" && <Button
                         label={"Update"}
-                        className={"bg-accent text-white w-full flex items-center justify-center"}
-                        onClick={() => handleToggleEditModal(true)}
-                    />
-                    <Button
-                        label={"View"}
                         className={"bg-tertiary text-white w-full flex items-center justify-center"}
+                        onClick={() => handleToggleEditModal(true)}
+                    />}
+                    {view && <Button
+                        label={"View"}
+                        className={"bg-accent text-white w-full flex items-center justify-center"}
                         onClick={() => navigate(`/admin/leaderboards/${item.id}`)}
-                    />
+                    />}
                 </div>
             </div>
 

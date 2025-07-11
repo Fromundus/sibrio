@@ -9,6 +9,8 @@ import { FaPause, FaPlay } from "react-icons/fa";
 import coins from "../assets/coins.png"
 
 const RenderLeaderboard = ({ leaderboard, users, loading, settings, settingsLoading }) => {
+    console.log("users", users);
+
   if(loading){
         return (
             <div className="min-h-[80svh] flex items-center justify-center">

@@ -119,7 +119,7 @@ const AdminLeaderboards = () => {
 
     const renderLeaderBoards = leaderboards?.map((item, idx) => {
         return (
-            <LeaderboardCard key={idx} item={item} setLeaderboards={setLeaderboards} />
+            <LeaderboardCard key={idx} item={item} setLeaderboards={setLeaderboards} view={true} />
         )
     });
 

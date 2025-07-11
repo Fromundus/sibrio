@@ -10,6 +10,7 @@ import Button from './ui/Button';
 import Input from './ui/Input';
 import Modal from './ui/Modal';
 import coins from '../assets/coins.png'
+import { useNavigate } from 'react-router-dom'
 
 const AdminUpdateLeaderboardPlayers = ({ leaderboard, setLeaderboard, users, setUsers }) => {
     const [loading, setLoading] = React.useState(false);
@@ -20,6 +21,8 @@ const AdminUpdateLeaderboardPlayers = ({ leaderboard, setLeaderboard, users, set
 
     const [cookie, setCookie] = React.useState("");
     const [cookieErrors, setCookieErrors] = React.useState("");
+
+    const navigate = useNavigate();
 
     const updateLeaderboardPlayers = async (e) => {
         e.preventDefault();
@@ -38,6 +41,8 @@ const AdminUpdateLeaderboardPlayers = ({ leaderboard, setLeaderboard, users, set
             console.log(res);
             setLoading(false);
             setLeaderboard(res.data.leaderboard);
+            setUsers(res.data.users);
+            setTopThree(res.data.top_three);
             notify(res.data.message);
         } catch (err) {
             console.log(err);
@@ -91,6 +96,7 @@ const AdminUpdateLeaderboardPlayers = ({ leaderboard, setLeaderboard, users, set
             setLoading(false);
             // setLeaderboard(res.data.leaderboard);
             // setUsers(res.data.users);
+            navigate('/admin/leaderboards')
             notify(res.data.message);
         } catch (err) {
             console.log(err);
@@ -112,10 +118,7 @@ const AdminUpdateLeaderboardPlayers = ({ leaderboard, setLeaderboard, users, set
     }
 
     const handleToggleDeclareModal = (action) => {
-        if(action){
-            document.body.classList.add('no-scroll');
-            // updateAndDeclareLeaderboard();
-        }
+        action ? document.body.classList.add('no-scroll') : document.body.classList.remove('no-scroll');
         setDeclareModal(action ? true : false);
     }
 
@@ -188,7 +191,7 @@ const AdminUpdateLeaderboardPlayers = ({ leaderboard, setLeaderboard, users, set
                             </div>
                             <div className={`py-1 px-2 rounded-xl flex flex-col items-center`}>
                                 <div className="flex items-center gap-2">
-                                    <img src={coins} className='w-4' alt="" /> {Number(user?.total_wagered * 0.01).toFixed(2)}
+                                    <img src={coins} className='w-4' alt="" /> {Number(user?.wagered_in_leaderboard * 0.01).toFixed(2)}
                                 </div>
                             </div>
                         </motion.div>

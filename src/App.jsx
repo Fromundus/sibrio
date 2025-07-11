@@ -6,7 +6,6 @@ import Unauthorized from './pages/Unauthorized';
 import NotFound from './pages/NotFound';
 import GuestLayout from './layouts/GuestLayout';
 import Landing from './pages/Landing';
-import Leaderboard from './pages/Leaderboard';
 import RequireAuthentication from './components/RequireAuthentication';
 import AdminLayout from './layouts/AdminLayout';
 import Login from './pages/Login';

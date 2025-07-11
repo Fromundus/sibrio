@@ -86,7 +86,7 @@ const LeaderboardCard = ({ item, setLeaderboards, view }) => {
                     <p className="mt-8 font-semibold text-lg">{item.name}</p>
                     {/* <span className='text-textSecondary text-xs font-semibold'>WINNER</span> */}
                     <div className="py-1 px-4 rounded-xl font-semibold mt-2 w-full flex flex-col gap-1 items-center">
-                        {item?.top_referred_users[0] && <div className='flex items-center justify-between w-full border border-yellow-500 bg-yellow-900 rounded-lg p-2'>
+                        {item?.top_referred_users[0] && <div className='flex items-center justify-between w-full border border-red-500 bg-red-900 rounded-lg p-2'>
                             <div className='flex items-center gap-2'>
                                 <span>{1}</span>
                                 <img className='w-6 rounded-full' src={item?.top_referred_users[0]?.avatar} alt="" />
@@ -129,7 +129,7 @@ const LeaderboardCard = ({ item, setLeaderboards, view }) => {
                         </div>}
                     </div>
                 </div>
-                {item.status === "active" || item.status === "ended" && <span className='font-semibold uppercase text-textSecondary'>{item.status === "ended" ? "Ended" : "Ends"} {formatDistanceToNow(item.leaderboard_ends_at, {addSuffix: true})}</span>}
+                {(item.status === "active" || item.status === "ended") && <span className='font-semibold uppercase text-textSecondary'>{item.status === "ended" ? "Ended" : "Ends"} {formatDistanceToNow(item.leaderboard_ends_at, {addSuffix: true})}</span>}
                 <div className='w-full p-4 flex gap-2 items-center'>
                     {item.status === "active" && <Button
                         label={"Update"}

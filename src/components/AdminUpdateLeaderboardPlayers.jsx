@@ -106,6 +106,25 @@ const AdminUpdateLeaderboardPlayers = ({ leaderboard, setLeaderboard, users, set
         }
     };
 
+    const pauseLeaderboard = async () => {
+        setLoading(true);
+        setCookieErrors("");
+
+        try {
+            const res = await axiosClient.put(`/pauseleaderboard/${leaderboard?.id}`);
+            console.log(res);
+            setLoading(false);
+            setLeaderboard(res.data.leaderboard);
+            // setUsers(res.data.users);
+            notify(res.data.message);
+        } catch (err) {
+            console.log(err);
+            setCookieErrors(err.response.data.message);
+            setLoading(false);
+            notify(err.message);
+        }
+    };
+
     const handleCookieChange = (e) => {
         const { value } = e.target;
         setCookieErrors("");
@@ -147,15 +166,26 @@ const AdminUpdateLeaderboardPlayers = ({ leaderboard, setLeaderboard, users, set
                         error={cookieErrors.cookie}
                     />}
 
+                    {leaderboard.status === "active" &&
+                    <Button
+                        loading={loading}
+                        disabled={loading}
+                        type={"button"}
+                        onClick={pauseLeaderboard}
+                        className={"bg-tertiary text-white w-full flex justify-center"}
+                        label={"Pause"}
+                    />}
+
                     <Button
                         loading={loading}
                         disabled={loading}
                         type={"button"}
                         onClick={updateLeaderboardPlayers}
                         className={"bg-primary text-white w-full flex justify-center"}
-                        label={"Update"}
+                        label={leaderboard.status === "paused" ? "Update and Play" : "Update"}
                     />
 
+                    {leaderboard.status === "active" &&
                     <Button
                         loading={loading}
                         disabled={loading}
@@ -163,7 +193,7 @@ const AdminUpdateLeaderboardPlayers = ({ leaderboard, setLeaderboard, users, set
                         onClick={updateAndDeclareLeaderboard}
                         className={"bg-accent text-white w-full flex justify-center"}
                         label={"Update & Declare"}
-                    />
+                    />}
                 </div>
             </Card>
 

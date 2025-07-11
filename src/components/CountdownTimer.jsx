@@ -27,7 +27,7 @@ const CountdownTimer = ({ targetDate }) => {
   }, [targetDate]);
 
   if (!timeLeft) {
-    return <span className="text-2xl text-red-500 font-semibold uppercase">Leaderboard ended</span>;
+    return <span className="text-2xl text-red-500 font-bold uppercase">Leaderboard ended</span>;
   }
 
   return (

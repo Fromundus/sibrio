@@ -7,6 +7,8 @@ import { motion } from 'framer-motion'
 import LeaderboardInfo from './LeaderboardInfo'
 import { FaPause, FaPlay } from "react-icons/fa";
 import coins from "../assets/coins.png"
+import ribbon from "../assets/purple-ribbon.png";
+import { MdError } from "react-icons/md";
 
 const RenderLeaderboard = ({ leaderboard, users, loading, settings, settingsLoading }) => {
     console.log("users", users);
@@ -15,6 +17,29 @@ const RenderLeaderboard = ({ leaderboard, users, loading, settings, settingsLoad
         return (
             <div className="min-h-[80svh] flex items-center justify-center">
                 <span className="font-semibold">LOADING...</span>
+            </div>
+        )
+    }
+
+    if(settings && !settingsLoading && !loading && !leaderboard){
+        return (
+            <div className="min-h-[80svh] flex flex-col items-center justify-center">
+                <Card tcenter={1} title={
+                    <span className="flex flex-col md:flex-row lg:flex-row items-center gap-4">
+                        <MdError className="w-8 h-8 text-yellow-500 animate-bounce" />
+                        <span>No Active Leaderboards</span>
+                    </span>
+                }>
+                    <div className="text-sm text-white mt-2 text-center">
+                        <p className="mb-3">There are currently no leaderboards running.</p>
+                        <p className="text-textSecondary">Please check back later for upcoming events, referral codes, and rewards!</p>
+
+                        <div className="flex flex-col md:flex-row lg:flex-row items-center max-w-md mx-auto mt-4 gap-2">
+                          <CodeLink settings={settings} />
+                        </div>
+                    </div>
+                </Card>
+                <LeaderboardHistory />
             </div>
         )
     }
@@ -96,13 +121,14 @@ const RenderLeaderboard = ({ leaderboard, users, loading, settings, settingsLoad
                 initial={{ y: 20, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
-                className="justify-center items-end gap-6 mt-10 mb-10 hidden md:flex lg:flex z-50"
+                className="justify-center items-end gap-10 mt-10 mb-10 hidden md:flex lg:flex z-50"
             >
                 
 
                 {/* 🥈 2nd Place */}
                 {users?.length >= 2 && (
-                <div className="flex flex-col py-8 px-14 rounded-2xl items-center flex-shrink-0 border-2 border-b-0 rounded-es-none rounded-ee-none border-blue-300 bg-gradient-to-b from-blue-900 to-transparent bg-opacity-50 hover:scale-105 transition-all">
+                <div className="flex flex-col py-8 px-16 rounded-2xl items-center flex-shrink-0 border-2 border-b-0 rounded-es-none rounded-ee-none border-blue-300 bg-gradient-to-b from-blue-900 to-transparent bg-opacity-50 hover:scale-105 transition-all relative">
+                    <img src={ribbon} className='absolute w-20 -top-8 -right-6' alt="" />
                     <div className="relative flex w-full items-center justify-center">
                     <img
                         src={users[1]?.avatar}
@@ -130,7 +156,8 @@ const RenderLeaderboard = ({ leaderboard, users, loading, settings, settingsLoad
                 )}
 
                 {/* 🥇 1st Place */}
-                <div className="flex flex-col py-8 px-14 rounded-2xl items-center flex-shrink-0 border-2 border-b-0 rounded-es-none rounded-ee-none border-yellow-300 bg-gradient-to-b from-yellow-900 to-transparent bg-opacity-50 hover:scale-105 transition-all">
+                <div className="flex flex-col py-8 px-16 rounded-2xl items-center flex-shrink-0 border-2 border-b-0 rounded-es-none rounded-ee-none border-red-300 bg-gradient-to-b from-red-900 to-transparent bg-opacity-50 hover:scale-105 transition-all relative">
+                    <img src={ribbon} className='absolute w-20 -top-8 -right-6' alt="" />
                     <div className="relative flex w-full items-center justify-center">
                         <img
                         src={users[0]?.avatar}
@@ -158,7 +185,8 @@ const RenderLeaderboard = ({ leaderboard, users, loading, settings, settingsLoad
 
                 {/* 🥉 3rd Place */}
                 {users?.length >= 3 && (
-                <div className="flex flex-col py-8 px-14 rounded-2xl items-center flex-shrink-0 border-2 border-b-0 rounded-es-none rounded-ee-none border-green-300 bg-gradient-to-b from-green-900 to-transparent bg-opacity-50 hover:scale-105 transition-all">
+                <div className="flex flex-col py-8 px-16 rounded-2xl items-center flex-shrink-0 border-2 border-b-0 rounded-es-none rounded-ee-none border-green-300 bg-gradient-to-b from-green-900 to-transparent bg-opacity-50 hover:scale-105 transition-all relative">
+                    <img src={ribbon} className='absolute w-20 -top-8 -right-6' alt="" />
                     <div className="relative flex w-full items-center justify-center">
                     <img
                         src={users[2]?.avatar}
@@ -194,11 +222,12 @@ const RenderLeaderboard = ({ leaderboard, users, loading, settings, settingsLoad
                 initial={{ y: 20, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
-                className="items-center gap-6 mt-10 mb-10 flex flex-col md:hidden lg:hidden max-w-4xl mx-auto w-full z-50"
+                className="items-center gap-10 mt-10 mb-10 flex flex-col md:hidden lg:hidden max-w-4xl mx-auto w-full z-50"
             >
                 
                 {/* 🥇 1st Place */}
-                <div className="flex flex-col py-8 px-14 rounded-2xl items-center flex-shrink-0 border-2 border-b-0 rounded-es-none rounded-ee-none border-yellow-300 bg-gradient-to-b from-yellow-900 to-transparent bg-opacity-50 hover:scale-105 transition-all">
+                <div className="flex flex-col py-8 px-16 rounded-2xl items-center flex-shrink-0 border-2 border-b-0 rounded-es-none rounded-ee-none border-red-300 bg-gradient-to-b from-red-900 to-transparent bg-opacity-50 hover:scale-105 transition-all relative">
+                    <img src={ribbon} className='absolute w-20 -top-8 -right-6' alt="" />
                     <div className="relative flex w-full items-center justify-center">
                         <img
                         src={users[0]?.avatar}
@@ -226,7 +255,8 @@ const RenderLeaderboard = ({ leaderboard, users, loading, settings, settingsLoad
 
                 {/* 🥈 2nd Place */}
                 {users?.length >= 2 && (
-                <div className="flex flex-col py-8 px-14 rounded-2xl items-center flex-shrink-0 border-2 border-b-0 rounded-es-none rounded-ee-none border-blue-300 bg-gradient-to-b from-blue-900 to-transparent bg-opacity-50 hover:scale-105 transition-all">
+                <div className="flex flex-col py-8 px-16 rounded-2xl items-center flex-shrink-0 border-2 border-b-0 rounded-es-none rounded-ee-none border-blue-300 bg-gradient-to-b from-blue-900 to-transparent bg-opacity-50 hover:scale-105 transition-all relative">
+                    <img src={ribbon} className='absolute w-20 -top-8 -right-6' alt="" />
                     <div className="relative flex w-full items-center justify-center">
                     <img
                         src={users[1]?.avatar}
@@ -255,7 +285,8 @@ const RenderLeaderboard = ({ leaderboard, users, loading, settings, settingsLoad
 
                 {/* 🥉 3rd Place */}
                 {users?.length >= 3 && (
-                <div className="flex flex-col py-8 px-14 rounded-2xl items-center flex-shrink-0 border-2 border-b-0 rounded-es-none rounded-ee-none border-green-300 bg-gradient-to-b from-green-900 to-transparent bg-opacity-50 hover:scale-105 transition-all">
+                <div className="flex flex-col py-8 px-16 rounded-2xl items-center flex-shrink-0 border-2 border-b-0 rounded-es-none rounded-ee-none border-green-300 bg-gradient-to-b from-green-900 to-transparent bg-opacity-50 hover:scale-105 transition-all relative">
+                    <img src={ribbon} className='absolute w-20 -top-8 -right-6' alt="" />
                     <div className="relative flex w-full items-center justify-center">
                     <img
                         src={users[2]?.avatar}

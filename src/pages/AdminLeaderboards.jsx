@@ -10,6 +10,7 @@ import axiosClient from '../axios-client';
 import Input from '../components/ui/Input';
 import notify from '../lib/notify';
 import LeaderboardCard from '../components/LeaderboardCard';
+import { FaCircleInfo, FaInfo } from 'react-icons/fa6';
 
 const AdminLeaderboards = () => {
     const { settings, settingsLoading } = useOutletContext();
@@ -82,9 +83,16 @@ const AdminLeaderboards = () => {
         } catch (err){
             console.log(err);
             setErrors(err.response.data.message);
+            notify(err.response.data.message);
             setLoading(false);
         }
     }
+
+    const activeLeaderboards = leaderboards.filter((item) => {
+        if(item.status === "active"){
+            return item;
+        }
+    });
 
     if(!settings && !settingsLoading){
         return (
@@ -131,94 +139,98 @@ const AdminLeaderboards = () => {
 
             {createModal && 
             <Modal title={"Create Leaderboard"} onClose={() => handleToggleCreateModal(false)}>
-                <Form onSubmit={handleCreateLeaderboard}>
-                    <Input
-                        id={"name"}
-                        name={"name"}
-                        onChange={handleChange}
-                        value={data.name}
-                        placeholder={"Name"}
-                        disabled={loading || settingsLoading}
-                        error={errors.name}
-                    />
+                {activeLeaderboards?.length > 0 ?
+                    <span className='flex items-center gap-4'><FaCircleInfo className='text-lg flex flex-shrink-0 text-accent' /> Please end all active leaderboards before starting a new one.</span>
+                    :
+                    <Form onSubmit={handleCreateLeaderboard}>
+                        <Input
+                            id={"name"}
+                            name={"name"}
+                            onChange={handleChange}
+                            value={data.name}
+                            placeholder={"Name"}
+                            disabled={loading || settingsLoading}
+                            error={errors.name}
+                        />
 
-                    <Input
-                        id={"cookie"}
-                        name={"cookie"}
-                        onChange={handleChange}
-                        value={data.cookie}
-                        placeholder={"Cookie"}
-                        disabled={loading || settingsLoading}
-                        error={errors.cookie}
-                    />
+                        <Input
+                            id={"cookie"}
+                            name={"cookie"}
+                            onChange={handleChange}
+                            value={data.cookie}
+                            placeholder={"Cookie"}
+                            disabled={loading || settingsLoading}
+                            error={errors.cookie}
+                        />
 
-                    <Input
-                        type={"number"}
-                        id={"first_prize"}
-                        name={"first_prize"}
-                        onChange={handleChange}
-                        value={data.first_prize}
-                        placeholder={"First Prize Amount"}
-                        disabled={loading || settingsLoading}
-                        error={errors.first_prize}
-                    />
+                        <Input
+                            type={"number"}
+                            id={"first_prize"}
+                            name={"first_prize"}
+                            onChange={handleChange}
+                            value={data.first_prize}
+                            placeholder={"First Prize Amount"}
+                            disabled={loading || settingsLoading}
+                            error={errors.first_prize}
+                        />
 
-                    <Input
-                        type={"number"}
-                        id={"second_prize"}
-                        name={"second_prize"}
-                        onChange={handleChange}
-                        value={data.second_prize}
-                        placeholder={"Second Prize Amount"}
-                        disabled={loading || settingsLoading}
-                        error={errors.second_prize}
-                    />
+                        <Input
+                            type={"number"}
+                            id={"second_prize"}
+                            name={"second_prize"}
+                            onChange={handleChange}
+                            value={data.second_prize}
+                            placeholder={"Second Prize Amount"}
+                            disabled={loading || settingsLoading}
+                            error={errors.second_prize}
+                        />
 
-                    <Input
-                        type={"number"}
-                        id={"third_prize"}
-                        name={"third_prize"}
-                        onChange={handleChange}
-                        value={data.third_prize}
-                        placeholder={"Third Prize Amount"}
-                        disabled={loading || settingsLoading}
-                        error={errors.third_prize}
-                    />
+                        <Input
+                            type={"number"}
+                            id={"third_prize"}
+                            name={"third_prize"}
+                            onChange={handleChange}
+                            value={data.third_prize}
+                            placeholder={"Third Prize Amount"}
+                            disabled={loading || settingsLoading}
+                            error={errors.third_prize}
+                        />
 
-                    <Input
-                        type={"datetime-local"}
-                        id={"leaderboard_ends_at"}
-                        name={"leaderboard_ends_at"}
-                        onChange={handleChange}
-                        value={data.leaderboard_ends_at}
-                        placeholder={"Leaderboard Ends At"}
-                        disabled={loading || settingsLoading}
-                        error={errors.leaderboard_ends_at}
-                    />
+                        <Input
+                            type={"datetime-local"}
+                            id={"leaderboard_ends_at"}
+                            name={"leaderboard_ends_at"}
+                            onChange={handleChange}
+                            value={data.leaderboard_ends_at}
+                            placeholder={"Leaderboard Ends At"}
+                            disabled={loading || settingsLoading}
+                            error={errors.leaderboard_ends_at}
+                        />
 
-                    <Input
-                        id={"description"}
-                        name={"description"}
-                        onChange={handleChange}
-                        value={data.description}
-                        placeholder={"Description"}
-                        disabled={loading || settingsLoading}
-                        error={errors.description}
-                    />
+                        <Input
+                            id={"description"}
+                            name={"description"}
+                            onChange={handleChange}
+                            value={data.description}
+                            placeholder={"Description"}
+                            disabled={loading || settingsLoading}
+                            error={errors.description}
+                        />
 
-                    {/* <label className="flex items-center gap-2 mb-4">
-                        <input type="checkbox" className='rounded h-5 w-5' name="status" checked={data.status} onChange={handleChange} />
-                        Enable Leaderboard
-                    </label> */}
+                        {/* <label className="flex items-center gap-2 mb-4">
+                            <input type="checkbox" className='rounded h-5 w-5' name="status" checked={data.status} onChange={handleChange} />
+                            Enable Leaderboard
+                        </label> */}
 
-                    <Button
-                        loading={loading}
-                        disabled={loading || settingsLoading}
-                        label={"Save Settings"}
-                        type={"submit"}
-                        className={"bg-primary text-white flex justify-center"}
-                    />
-                </Form>
+                        <Button
+                            loading={loading}
+                            disabled={loading || settingsLoading}
+                            label={"Save Settings"}
+                            type={"submit"}
+                            className={"bg-primary text-white flex justify-center"}
+                        />
+                    </Form>
+                }
             </Modal>}
         </Page>
     )

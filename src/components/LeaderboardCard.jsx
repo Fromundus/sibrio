@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { formatDistanceToNow } from 'date-fns';
+import { format, formatDistanceToNow } from 'date-fns';
 import trophy from "../assets/trophy.png";
 import coins from "../assets/coins.png";
 import Button from './ui/Button';
@@ -57,7 +57,7 @@ const LeaderboardCard = ({ item, setLeaderboards }) => {
         setErrors({});
 
         try {
-            const res = await axiosClient.put('/updateleaderboard', data);
+            const res = await axiosClient.put(`/updateleaderboardsettings/${item.id}`, data);
             console.log(res);
             setLeaderboards(res.data.data);
             notify(res.data.message);
@@ -66,6 +66,7 @@ const LeaderboardCard = ({ item, setLeaderboards }) => {
         } catch (err){
             console.log(err);
             setErrors(err.response.data.message);
+            notify(err.response.data.message);
             setLoading(false);
         }
     }
@@ -138,6 +139,7 @@ const LeaderboardCard = ({ item, setLeaderboards }) => {
                     />
                 </div>
             </div>
+
             {editModal && 
             <Modal title={`Update ${item.name}`} onClose={() => handleToggleEditModal(false)}>
                 <Form onSubmit={handleUpdateLeaderboard}>
@@ -149,16 +151,6 @@ const LeaderboardCard = ({ item, setLeaderboards }) => {
                         placeholder={"Name"}
                         disabled={loading}
                         error={errors.name}
-                    />
-
-                    <Input
-                        id={"cookie"}
-                        name={"cookie"}
-                        onChange={handleChange}
-                        value={data.cookie}
-                        placeholder={"Cookie"}
-                        disabled={loading}
-                        error={errors.cookie}
                     />
 
                     <Input

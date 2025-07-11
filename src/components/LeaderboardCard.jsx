@@ -84,11 +84,11 @@ const LeaderboardCard = ({ item, setLeaderboards }) => {
                     <p className="mt-8 font-semibold text-lg">{item.name}</p>
                     {/* <span className='text-textSecondary text-xs font-semibold'>WINNER</span> */}
                     <div className="py-1 px-4 rounded-xl font-semibold mt-2 w-full flex flex-col gap-1 items-center">
-                        <div className='flex items-center justify-between w-full border border-yellow-500 bg-yellow-900 rounded-lg p-2'>
+                        {item?.referred_users[0] && <div className='flex items-center justify-between w-full border border-yellow-500 bg-yellow-900 rounded-lg p-2'>
                             <div className='flex items-center gap-2'>
                                 <span>{1}</span>
-                                <img className='w-6 rounded-full' src={item?.referred_users[0].avatar} alt="" />
-                                <span>{item?.referred_users[0].name}</span>
+                                <img className='w-6 rounded-full' src={item?.referred_users[0]?.avatar} alt="" />
+                                <span>{item?.referred_users[0]?.name}</span>
                             </div>
                             <div className='flex items-center gap-2'>
                                 <div className='flex items-center gap-2'>
@@ -96,12 +96,13 @@ const LeaderboardCard = ({ item, setLeaderboards }) => {
                                     {item.first_prize}
                                 </div>
                             </div>
-                        </div>
-                        <div className='flex items-center justify-between w-full border border-blue-500 bg-blue-900 rounded-lg p-2'>
+                        </div>}
+
+                        {item?.referred_users[1] && <div className='flex items-center justify-between w-full border border-blue-500 bg-blue-900 rounded-lg p-2'>
                             <div className='flex items-center gap-2'>
                                 <span>{2}</span>
-                                <img className='w-6 rounded-full' src={item?.referred_users[1].avatar} alt="" />
-                                <span>{item?.referred_users[1].name}</span>
+                                <img className='w-6 rounded-full' src={item?.referred_users[1]?.avatar} alt="" />
+                                <span>{item?.referred_users[1]?.name}</span>
                             </div>
                             <div className='flex items-center gap-2'>
                                 <div className='flex items-center gap-2'>
@@ -109,12 +110,13 @@ const LeaderboardCard = ({ item, setLeaderboards }) => {
                                     {item.second_prize}
                                 </div>
                             </div>
-                        </div>
-                        <div className='flex items-center justify-between w-full border border-green-500 bg-green-900 rounded-lg p-2'>
+                        </div>}
+
+                        {item?.referred_users[2] && <div className='flex items-center justify-between w-full border border-green-500 bg-green-900 rounded-lg p-2'>
                             <div className='flex items-center gap-2'>
                                 <span>{3}</span>
-                                <img className='w-6 rounded-full' src={item?.referred_users[2].avatar} alt="" />
-                                <span>{item?.referred_users[2].name}</span>
+                                <img className='w-6 rounded-full' src={item?.referred_users[2]?.avatar} alt="" />
+                                <span>{item?.referred_users[2]?.name}</span>
                             </div>
                             <div className='flex items-center gap-2'>
                                 <div className='flex items-center gap-2'>
@@ -122,7 +124,7 @@ const LeaderboardCard = ({ item, setLeaderboards }) => {
                                     {item.third_prize}
                                 </div>
                             </div>
-                        </div>
+                        </div>}
                     </div>
                 </div>
                 <span className='font-semibold uppercase text-textSecondary'>Ends {formatDistanceToNow(item.leaderboard_ends_at, {addSuffix: true})}</span>

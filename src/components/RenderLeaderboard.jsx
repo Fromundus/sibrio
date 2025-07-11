@@ -114,7 +114,7 @@ const RenderLeaderboard = ({ leaderboard, users, loading, settings, settingsLoad
                     <p className="mt-6 font-semibold">{users[1]?.name}</p>
                     <div className="py-1 px-2 rounded-xl font-semibold mt-2 flex flex-col items-center">
                         <div className="flex items-center gap-2">
-                            <img src={coins} className={"w-4"} /> {Number(users[1]?.total_wagered).toFixed(2)}
+                            <img src={coins} className={"w-4"} /> {Number(users[1]?.wagered_in_leaderboard).toFixed(2)}
                         </div>
                         <span className="text-xs text-textSecondary">WAGERED</span>
                     </div>
@@ -142,7 +142,7 @@ const RenderLeaderboard = ({ leaderboard, users, loading, settings, settingsLoad
                     <p className="mt-6 font-semibold">{users[0]?.name}</p>
                     <div className="py-1 px-2 rounded-xl font-semibold mt-2 flex flex-col items-center">
                         <div className="flex items-center gap-2">
-                            <img src={coins} className={"w-4"} /> {Number(users[0]?.total_wagered).toFixed(2)}
+                            <img src={coins} className={"w-4"} /> {Number(users[0]?.wagered_in_leaderboard).toFixed(2)}
                         </div>
                         <span className="text-xs text-textSecondary">WAGERED</span>
                     </div>
@@ -170,7 +170,7 @@ const RenderLeaderboard = ({ leaderboard, users, loading, settings, settingsLoad
                     <p className="mt-6 font-semibold">{users[2]?.name}</p>
                     <div className="py-1 px-2 rounded-xl font-semibold mt-2 flex flex-col items-center">
                         <div className="flex items-center gap-2">
-                            <img src={coins} className={"w-4"} /> {Number(users[2]?.total_wagered).toFixed(2)}
+                            <img src={coins} className={"w-4"} /> {Number(users[2]?.wagered_in_leaderboard).toFixed(2)}
                         </div>
                         <span className="text-xs text-textSecondary">WAGERED</span>
                     </div>
@@ -210,7 +210,7 @@ const RenderLeaderboard = ({ leaderboard, users, loading, settings, settingsLoad
                     <p className="mt-6 font-semibold">{users[0]?.name}</p>
                     <div className="py-1 px-2 rounded-xl font-semibold mt-2 flex flex-col items-center">
                         <div className="flex items-center gap-2">
-                            <img src={coins} className={"w-4"} /> {Number(users[0]?.total_wagered).toFixed(2)}
+                            <img src={coins} className={"w-4"} /> {Number(users[0]?.wagered_in_leaderboard).toFixed(2)}
                         </div>
                         <span className="text-xs text-textSecondary">WAGERED</span>
                     </div>
@@ -238,7 +238,7 @@ const RenderLeaderboard = ({ leaderboard, users, loading, settings, settingsLoad
                     <p className="mt-6 font-semibold">{users[1]?.name}</p>
                     <div className="py-1 px-2 rounded-xl font-semibold mt-2 flex flex-col items-center">
                         <div className="flex items-center gap-2">
-                            <img src={coins} className={"w-4"} /> {Number(users[1]?.total_wagered).toFixed(2)}
+                            <img src={coins} className={"w-4"} /> {Number(users[1]?.wagered_in_leaderboard).toFixed(2)}
                         </div>
                         <span className="text-xs text-textSecondary">WAGERED</span>
                     </div>
@@ -267,7 +267,7 @@ const RenderLeaderboard = ({ leaderboard, users, loading, settings, settingsLoad
                     <p className="mt-6 font-semibold">{users[2]?.name}</p>
                     <div className="py-1 px-2 rounded-xl font-semibold mt-2 flex flex-col items-center">
                         <div className="flex items-center gap-2">
-                            <img src={coins} className={"w-4"} /> {Number(users[2]?.total_wagered).toFixed(2)}
+                            <img src={coins} className={"w-4"} /> {Number(users[2]?.wagered_in_leaderboard).toFixed(2)}
                         </div>
                         <span className="text-xs text-textSecondary">WAGERED</span>
                     </div>
@@ -320,7 +320,7 @@ const RenderLeaderboard = ({ leaderboard, users, loading, settings, settingsLoad
                     </div>
                     <div className={`py-1 px-2 rounded-xl flex flex-col items-center`}>
                         <div className="flex items-center gap-2">
-                            <img src={coins} className={"w-4"} /> {Number(user?.total_wagered).toFixed(2)}
+                            <img src={coins} className={"w-4"} /> {Number(user?.wagered_in_leaderboard).toFixed(2)}
                         </div>
                     </div>
                 </motion.div>

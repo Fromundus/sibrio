@@ -61,14 +61,14 @@ const LeaderboardInfo = ({ settings, leaderboard }) => {
                 <CodeLink settings={settings} />
             </motion.div>}
 
-            {leaderboard?.created_at && 
+            {leaderboard?.updated_at && 
             <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 1, ease: "backInOut" }}
                 className="flex items-center gap-2 text-sm py-2"
             >
-                <span className="font-semibold uppercase text-textSecondary">UPDATED {formatDistanceToNow(leaderboard?.created_at, { addSuffix: true })}</span>
+                <span className="font-semibold uppercase text-textSecondary">UPDATED {formatDistanceToNow(leaderboard?.updated_at, { addSuffix: true })}</span>
             </motion.div>}
         </div>
     )

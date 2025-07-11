@@ -15,9 +15,8 @@ const AdminUpdateLeaderboardPlayers = ({ leaderboard, setLeaderboard, users, set
     const [loading, setLoading] = React.useState(false);
     const [helpModal, setHelpModal] = React.useState(false);
     const [declareModal, setDeclareModal] = React.useState(false);
-
-    const [topThree, setTopThree] = React.useState([]);
     
+    const [topThree, setTopThree] = React.useState([]);
 
     const [cookie, setCookie] = React.useState("");
     const [cookieErrors, setCookieErrors] = React.useState("");
@@ -115,7 +114,7 @@ const AdminUpdateLeaderboardPlayers = ({ leaderboard, setLeaderboard, users, set
     const handleToggleDeclareModal = (action) => {
         if(action){
             document.body.classList.add('no-scroll');
-            updateAndDeclareLeaderboard();
+            // updateAndDeclareLeaderboard();
         }
         setDeclareModal(action ? true : false);
     }
@@ -130,9 +129,9 @@ const AdminUpdateLeaderboardPlayers = ({ leaderboard, setLeaderboard, users, set
             }>
                 {!leaderboard?.created_at && <span className='text-textSecondary'>Click help to see how to update the leaderboard using cookie.</span>}
                 <div className='flex flex-col gap-2 mt-4'>
-                    {leaderboard?.created_at && <div className="flex items-center gap-2 text-sm py-2">
+                    {leaderboard?.updated_at && <div className="flex items-center gap-2 text-sm py-2">
                         <FaClock className="text-tertiary" />
-                        <span className="font-medium">Last updated: <span className="text-textSecondary">{format(leaderboard?.created_at, "MMMM d, yyyy – hh:mm a")} · {formatDistanceToNow(leaderboard?.created_at, { addSuffix: true })}</span></span>
+                        <span className="font-medium">Last updated: <span className="text-textSecondary">{format(leaderboard?.updated_at, "MMMM d, yyyy – hh:mm a")} · {formatDistanceToNow(leaderboard?.updated_at, { addSuffix: true })}</span></span>
                     </div>}
                     {leaderboard?.cookie_status !== "active" &&
                     <Input

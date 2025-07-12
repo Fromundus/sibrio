@@ -115,6 +115,8 @@ const RenderLeaderboard = ({ leaderboard, users, loading, setLoading, settings, 
     <div className="w-full flex flex-col items-center gap-4">
         <LeaderboardInfo setLoading={setLoading} settings={settings} leaderboard={leaderboard} />
 
+        <h1 className="text-2xl text-white font-extrabold flex items-center gap-2">LIST OF <span className='text-primary'>WINNERS</span></h1>
+
         {/* Top 3 Section */}
         {users?.length >= 1 && (
             <motion.div 
@@ -150,7 +152,7 @@ const RenderLeaderboard = ({ leaderboard, users, loading, setLoading, settings, 
                         <div className="flex items-center gap-2 text-lg font-bold">
                             <img className="w-4" src={coins} alt="" /> {Number(leaderboard?.second_prize).toFixed(2)}
                         </div>
-                        <span className="text-xs text-textSecondary">PRICE</span>
+                        <span className="text-xs text-textSecondary">PRIZE</span>
                     </div>
                 </div>
                 )}
@@ -179,7 +181,7 @@ const RenderLeaderboard = ({ leaderboard, users, loading, setLoading, settings, 
                         <div className="flex items-center gap-2 text-lg font-bold">
                             <img className="w-4" src={coins} alt="" /> {Number(leaderboard?.first_prize).toFixed(2)}
                         </div>
-                        <span className="text-xs text-textSecondary">PRICE</span>
+                        <span className="text-xs text-textSecondary">PRIZE</span>
                     </div>
                 </div>
 
@@ -208,7 +210,7 @@ const RenderLeaderboard = ({ leaderboard, users, loading, setLoading, settings, 
                         <div className="flex items-center gap-2 text-lg font-bold">
                             <img className="w-4" src={coins} alt="" /> {Number(leaderboard?.third_prize).toFixed(2)}
                         </div>
-                        <span className="text-xs text-textSecondary">PRICE</span>
+                        <span className="text-xs text-textSecondary">PRIZE</span>
                     </div>
                 </div>
                 )}
@@ -249,7 +251,7 @@ const RenderLeaderboard = ({ leaderboard, users, loading, setLoading, settings, 
                         <div className="flex items-center gap-2 text-lg font-bold">
                             <img className="w-4" src={coins} alt="" /> {Number(leaderboard?.first_prize).toFixed(2)}
                         </div>
-                        <span className="text-xs text-textSecondary">PRICE</span>
+                        <span className="text-xs text-textSecondary">PRIZE</span>
                     </div>
                 </div>
 
@@ -278,7 +280,7 @@ const RenderLeaderboard = ({ leaderboard, users, loading, setLoading, settings, 
                         <div className="flex items-center gap-2 text-lg font-bold">
                             <img className="w-4" src={coins} alt="" /> {Number(leaderboard?.second_prize).toFixed(2)}
                         </div>
-                        <span className="text-xs text-textSecondary">PRICE</span>
+                        <span className="text-xs text-textSecondary">PRIZE</span>
                     </div>
                 </div>
                 )}
@@ -308,7 +310,7 @@ const RenderLeaderboard = ({ leaderboard, users, loading, setLoading, settings, 
                         <div className="flex items-center gap-2 text-lg font-bold">
                             <img className="w-4" src={coins} alt="" /> {Number(leaderboard?.third_prize).toFixed(2)}
                         </div>
-                        <span className="text-xs text-textSecondary">PRICE</span>
+                        <span className="text-xs text-textSecondary">PRIZE</span>
                     </div>
                 </div>
                 )}

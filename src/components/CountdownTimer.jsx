@@ -90,7 +90,7 @@ const CountdownTimer = ({ targetDate, setLoading }) => {
   }, [timeLeft]);
 
   if (!timeLeft) {
-    return <span className="text-2xl text-red-500 font-bold uppercase">Leaderboard ended</span>;
+    return <span className="text-2xl text-white font-bold uppercase">Leaderboard ended</span>;
   }
 
   return (

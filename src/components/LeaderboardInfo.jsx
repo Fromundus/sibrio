@@ -6,7 +6,7 @@ import { format, formatDistanceToNow } from "date-fns";
 import CountdownTimer from "../components/CountdownTimer";
 import CodeLink from "./CodeLink";
 
-const LeaderboardInfo = ({ settings, leaderboard }) => {
+const LeaderboardInfo = ({ settings, leaderboard, setLoading }) => {
     return (
         <div className="flex flex-col gap-4 w-full items-center justify-center text-center">
             <motion.div
@@ -27,7 +27,9 @@ const LeaderboardInfo = ({ settings, leaderboard }) => {
                 whileInView={{ y: 0, opacity: 1 }}
                 transition={{ duration: 1, ease: "easeOut" }}
                 className="z-50 mt-4">
-                <h1 className="text-2xl text-[#ed9c07] font-extrabold flex items-center gap-2"><div><img className="max-w-sm w-8" src={coins} alt="" /></div> {Number(leaderboard?.first_prize) + Number(leaderboard?.second_prize) + Number(leaderboard?.third_prize)} <span className="text-white uppercase">Every End Season</span></h1>
+                <div className="text-2xl text-[#ed9c07] font-extrabold">
+                    <img className="max-w-sm w-8 inline-block" src={coins} alt="" /> {Number(leaderboard?.first_prize) + Number(leaderboard?.second_prize) + Number(leaderboard?.third_prize)} <span className="text-white uppercase">Every End Season</span>
+                </div>
             </motion.div>}
 
             <motion.div 
@@ -48,7 +50,7 @@ const LeaderboardInfo = ({ settings, leaderboard }) => {
                 whileInView={{ y: 0, opacity: 1 }}
                 transition={{ duration: 1, ease: "easeOut" }}
             >
-                <CountdownTimer targetDate={leaderboard?.leaderboard_ends_at} />
+                <CountdownTimer setLoading={setLoading} targetDate={leaderboard?.leaderboard_ends_at} />
             </motion.div>}
             
             {settings?.referral_code && settings?.referral_link && 

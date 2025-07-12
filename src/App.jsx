@@ -12,8 +12,9 @@ import Login from './pages/Login';
 import AdminSiteSettings from './pages/AdminSiteSettings';
 import AdminAccountSettings from './pages/AdminAccountSettings';
 import AdminLeaderboard from './pages/AdminLeaderboard';
-import GuestLeaderboard from './pages/GuestLeaderboard';
+import GuestLatestLeaderboard from './pages/GuestLatestLeaderboard';
 import AdminLeaderboards from './pages/AdminLeaderboards';
+import GuestLeaderboard from './pages/GuestLeaderboard';
 
 const roles = {
     admin: "admin",
@@ -23,7 +24,8 @@ const router = createBrowserRouter(createRoutesFromElements(
     <>
         <Route path='/' element={<GuestLayout />}>
             <Route index element={<Landing />} />
-            <Route path='leaderboards' element={<GuestLeaderboard />} />
+            <Route path='leaderboards' element={<GuestLatestLeaderboard />} />
+            <Route path='leaderboards/:id' element={<GuestLeaderboard />} />
             <Route path='login' element={<Login />} />
             {/* <Route path="signup" element={<Signup />} /> */}
         </Route>

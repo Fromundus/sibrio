@@ -9,8 +9,10 @@ import axiosClient from '../axios-client';
 import notify from '../lib/notify';
 import Form from './ui/Form';
 import Input from './ui/Input';
+import { useStateContext } from '../context/ContextProvider';
 
 const LeaderboardCard = ({ item, setLeaderboards, view }) => {
+    const { role } = useStateContext();
     const navigate = useNavigate();
     const [loading, setLoading] = React.useState(false);
     const [editModal, setEditModal] = React.useState(false);
@@ -131,7 +133,7 @@ const LeaderboardCard = ({ item, setLeaderboards, view }) => {
                 </div>
                 {(item.status === "active" || item.status === "ended") && <span className='font-semibold uppercase text-textSecondary'>{item.status === "ended" ? "Ended" : "Ends"} {formatDistanceToNow(item.leaderboard_ends_at, {addSuffix: true})}</span>}
                 <div className='w-full p-4 flex gap-2 items-center'>
-                    {item.status === "active" && <Button
+                    {item.status !== "ended" && <Button
                         label={"Update"}
                         className={"bg-tertiary text-white w-full flex items-center justify-center"}
                         onClick={() => handleToggleEditModal(true)}
@@ -139,7 +141,10 @@ const LeaderboardCard = ({ item, setLeaderboards, view }) => {
                     {view && <Button
                         label={"View"}
                         className={"bg-accent text-white w-full flex items-center justify-center"}
-                        onClick={() => navigate(`/admin/leaderboards/${item.id}`)}
+                        onClick={() => {
+                            window.scrollTo(0, 0);
+                            navigate(role ? `/admin/leaderboards/${item.id}` : `/leaderboards/${item.id}`)
+                        }}
                     />}
                 </div>
             </div>

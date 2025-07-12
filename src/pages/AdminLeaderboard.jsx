@@ -16,6 +16,7 @@ const AdminLeaderboard = () => {
     const navigate = useNavigate();
 
     const fetchLeaderboard = async () => {
+      setLoading(true);
       try {
         const res = await axiosClient.get(`/leaderboards/${id}`);
         console.log(res);
@@ -34,7 +35,7 @@ const AdminLeaderboard = () => {
 
     if(!leaderboard && !loading){
       return (
-        <div className='p-6 min-h-[80svh] flex flex-col gap-4 items-center justify-center'>
+        <div className='p-6 min-h-[80svh] flex flex-col gap-4 items-center justify-center text-center'>
           <span className='font-bold text-2xl'>Sorry, we can't find that leaderboard.</span>
           <Button
             label={"Go to Leaderboards"}
@@ -47,8 +48,13 @@ const AdminLeaderboard = () => {
 
     return (
       <Page className={"flex flex-col gap-8 w-full"}>
-        {(leaderboard?.status === "active" || leaderboard?.status === "paused" ) && <AdminUpdateLeaderboardPlayers leaderboard={leaderboard} setLeaderboard={setLeaderboard} users={users} setUsers={setUsers} />}
-        <RenderLeaderboard leaderboard={leaderboard} users={users} loading={loading} settings={settings} settingsLoading={settingsLoading} />
+          <Button
+              className={"bg-tertiary text-white w-fit"}
+              label={"Back To Leaderboards"}
+              onClick={() => navigate(-1)}
+          />
+        {(leaderboard?.status === "active" || leaderboard?.status === "paused" ) && !loading && <AdminUpdateLeaderboardPlayers leaderboard={leaderboard} setLeaderboard={setLeaderboard} users={users} setUsers={setUsers} />}
+        <RenderLeaderboard leaderboard={leaderboard} users={users} loading={loading} setLoading={setLoading} settings={settings} settingsLoading={settingsLoading} />
       </Page>
     )
 }

@@ -51,7 +51,7 @@ const LeaderboardHistory = () => {
       //       </div>
       //     </div>
       // </div>
-      <LeaderboardCard key={idx} item={item} />
+      <LeaderboardCard view={true} key={idx} item={item} />
     )
   })
 

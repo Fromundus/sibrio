@@ -11,11 +11,13 @@ import Input from '../components/ui/Input';
 import notify from '../lib/notify';
 import LeaderboardCard from '../components/LeaderboardCard';
 import { FaCircleInfo, FaInfo } from 'react-icons/fa6';
+import CookieHelpModal from '../components/CookieHelpModal';
 
 const AdminLeaderboards = () => {
     const { settings, settingsLoading } = useOutletContext();
     const [loading, setLoading] = React.useState(false);
     const [createModal, setCreateModal] = React.useState(false);
+    const [helpModal, setHelpModal] = React.useState(false);
     const [leaderboards, setLeaderboards] = React.useState([]);
     const [data, setData] = React.useState({
         name: "",
@@ -61,11 +63,19 @@ const AdminLeaderboards = () => {
                 [name]: value
             }
         })
+
+        setErrors({});
     }
 
     const handleToggleCreateModal = (action) => {
         action ? document.body.classList.add('no-scroll') : document.body.classList.remove('no-scroll');
         setCreateModal(action ? true : false);
+        setErrors({});
+    }
+
+    const handleToggleHelpModal = (action) => {
+        action && document.body.classList.add('no-scroll');
+        setHelpModal(action ? true : false);
     }
 
     const handleCreateLeaderboard = async (e) => {
@@ -89,7 +99,7 @@ const AdminLeaderboards = () => {
     }
 
     const activeLeaderboards = leaderboards.filter((item) => {
-        if(item.status === "active"){
+        if(item.status === "active" || item.status === "paused"){
             return item;
         }
     });
@@ -140,7 +150,9 @@ const AdminLeaderboards = () => {
             {createModal && 
             <Modal title={"Create Leaderboard"} onClose={() => handleToggleCreateModal(false)}>
                 {activeLeaderboards?.length > 0 ?
-                    <span className='flex items-center gap-4'><FaCircleInfo className='text-lg flex flex-shrink-0 text-accent' /> Please end all active leaderboards before starting a new one.</span>
+                    <div className='text-textSecondary'>
+                        <FaCircleInfo className='text-lg inline-block text-accent' /> Please end all <span className='font-semibold text-green-500'>active</span> or <span className='font-semibold text-white'>paused</span> leaderboards before starting a new one.
+                    </div>
                     :
                     <Form onSubmit={handleCreateLeaderboard}>
                         <Input
@@ -162,6 +174,7 @@ const AdminLeaderboards = () => {
                             disabled={loading || settingsLoading}
                             error={errors.cookie}
                         />
+                        <CookieHelpModal helpModal={helpModal} handleToggleHelpModal={handleToggleHelpModal} />
 
                         <Input
                             type={"number"}

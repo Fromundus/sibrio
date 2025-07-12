@@ -10,7 +10,7 @@ import coins from "../assets/coins.png"
 import ribbon from "../assets/purple-ribbon.png";
 import { MdError } from "react-icons/md";
 
-const RenderLeaderboard = ({ leaderboard, users, loading, settings, settingsLoading }) => {
+const RenderLeaderboard = ({ leaderboard, users, loading, setLoading, settings, settingsLoading }) => {
     console.log("users", users);
 
   if(loading){
@@ -113,7 +113,7 @@ const RenderLeaderboard = ({ leaderboard, users, loading, settings, settingsLoad
 
   return (
     <div className="w-full flex flex-col items-center gap-4">
-        <LeaderboardInfo settings={settings} leaderboard={leaderboard} />
+        <LeaderboardInfo setLoading={setLoading} settings={settings} leaderboard={leaderboard} />
 
         {/* Top 3 Section */}
         {users?.length >= 1 && (

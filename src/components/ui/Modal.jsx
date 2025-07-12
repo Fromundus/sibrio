@@ -2,10 +2,10 @@ import { motion } from 'framer-motion'
 import React from 'react'
 import { IoClose } from 'react-icons/io5'
 
-function Modal({title, onClose, loading, children }) {
+function Modal({title, onClose, loading, children, className }) {
     return (
         <div
-            className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start p-2 sm:p-8 md:p-8 lg:p-8 overflow-y-auto not-printable-components"
+            className={`fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start p-2 sm:p-8 md:p-8 lg:p-8 overflow-y-auto not-printable-components text-sm font-normal ${className}`}
             style={{ zIndex: 1000 }}
             onClick={(e) => e.stopPropagation()}
         >

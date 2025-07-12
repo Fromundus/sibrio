@@ -55,9 +55,6 @@ const LeaderboardInfo = ({ settings, leaderboard, setLoading }) => {
 
             {leaderboard?.updated_at && leaderboard?.status === "active" &&
             <div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 1, ease: "backInOut" }}
                 className="flex items-center gap-2 text-sm py-2"
             >
                 <span className="font-semibold uppercase text-textSecondary">UPDATED {formatDistanceToNow(leaderboard?.updated_at, { addSuffix: true })}</span>

@@ -3,7 +3,7 @@ import { Outlet, Navigate } from "react-router-dom";
 import { useStateContext } from "../context/ContextProvider";
 
 export default function RequireAuthentication({ allowedRoles }){
-    const { role, id } = useStateContext();
+    const { role, id, token } = useStateContext();
 
     return (
         !role || !id ? <Navigate to="/" />

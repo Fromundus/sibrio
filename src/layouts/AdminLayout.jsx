@@ -7,12 +7,15 @@ import axiosClient from '../axios-client';
 import { Bounce, ToastContainer } from 'react-toastify';
 
 function AdminLayout() {
+    const { id, role, token, name } = useStateContext();
     const [settingsLoading, setSettingsLoading] = React.useState(true);
     const [leaderboard, setLeaderboard] = React.useState({});
     const [settings, setSettings] = React.useState({
         referral_code: '',
         referral_link: '',
     });
+
+    const navigate = useNavigate();
     
     React.useEffect(() => {
         setSettingsLoading(true);
@@ -31,6 +34,20 @@ function AdminLayout() {
     React.useEffect( () => {
         document.body.classList.remove('no-scroll');
     }, []);
+
+    console.log(name);
+
+    if(((role || id || token) && !name)){
+        navigate('/');
+    }
+    
+    console.log(role);
+
+    // React.useEffect(() => {
+    //     if((!role || !id || !token)){
+    //         navigate('/');
+    //     }
+    // }, [role, id, token]);
 
     return (
         <div className='bg-background text-textPrimary overflow-x-hidden'>

@@ -18,7 +18,7 @@ import karambit from "../assets/guns/karambit.png";
 import ak47 from "../assets/guns/ak47.webp";
 
 function GuestLayout() {
-    const { role } = useStateContext();
+    const { role, id, token, name } = useStateContext();
     const [settings, setSettings] = React.useState();
     const [settingsLoading, setSettingsLoading] = React.useState(true);
     
@@ -43,7 +43,7 @@ function GuestLayout() {
         document.body.classList.remove('no-scroll');
     }, []);
 
-    if(role){
+    if(role && id && token && name){
         return <Navigate to={`${role}`} />
     }
 

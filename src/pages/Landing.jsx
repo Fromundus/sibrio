@@ -20,28 +20,11 @@ import Page from '../components/ui/Page';
 const Landing = () => {
   const { settings } = useOutletContext();
   const navigate = useNavigate();
-  React.useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  const [copied, setCopied] = React.useState(false);
-
-  const handleCopy = () => {
-      settings?.referral_code && navigator.clipboard.writeText(settings?.referral_code).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 10000); // Reset after 2s
-      });
-  };
+    React.useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
   return (
-    // <div className="w-full flex flex-col items-center gap-4">
-    //   <div className="mt-20">
-    //       <h1 className="text-6xl text-primary font-extrabold">SIBIRO</h1>
-    //   </div>
-
-    //   <span className='text-white mt-4'>Enjoy juicy rewards & VIP perks everyday for playing under the code DRWGAMBA</span>
-    // </div>
-
     <Page className={"bg-gradient-to-b from-background via-surface to-primaryHover min-h-[100svh] flex"}>
         <motion.div 
             initial={{ y: 20, opacity: 0 }}

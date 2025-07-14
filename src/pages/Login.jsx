@@ -39,20 +39,18 @@ function Login() {
         setErrors("");
 
         axiosClient.post("/login", data)
-            .then( ({data}) => {
-                console.log(data);
-                if(data.message === "Invalid Credentials"){
-                    setErrors(data.message);
-                } else if (data.message === "Pending Account"){
-                    setErrors(data.message);
-                } else {
-                    setErrors("Invalid Account")
+            .then( (res) => {
+                console.log(res);
+                if(res.data.message === "Invalid Credentials"){
+                    setErrors(res.data.message);
+                } else if (res.data.message === "Pending Account"){
+                    setErrors(res.data.message);
                 }
 
-                setToken(data.token);
-                setRole(data.role);
-                setName(data.name);
-                setId(data.id);
+                setToken(res.data.token);
+                setRole(res.data.role);
+                setName(res.data.name);
+                setId(res.data.id);
                 setIsloading(false);
             })
             .catch( (err) => {
@@ -72,7 +70,7 @@ function Login() {
         <Page className={"min-h-[80svh] w-full flex items-center"}>
             <Card title={"Admin Login"} className={"w-full"} tcenter={1}>
                 <Form onSubmit={handleSubmit}>
-                    {errors && <span className='text-center bg-red-400 p-1.5 rounded text-white font-semibold mb-2'>{errors}</span>}
+                    {errors && !isLoading && <span className='text-center bg-red-400 p-1.5 rounded text-white font-semibold mb-2'>{errors}</span>}
                      <Input 
                          id="username"
                          type={"text"}

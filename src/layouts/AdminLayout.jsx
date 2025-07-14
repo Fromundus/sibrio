@@ -35,13 +35,13 @@ function AdminLayout() {
         document.body.classList.remove('no-scroll');
     }, []);
 
-    console.log(name);
+    // console.log(name);
 
-    if(((role || id || token) && !name)){
-        navigate('/');
-    }
+    // if(((role || id || token) && !name)){
+    //     navigate('/');
+    // }
     
-    console.log(role);
+    // console.log(role);
 
     // React.useEffect(() => {
     //     if((!role || !id || !token)){

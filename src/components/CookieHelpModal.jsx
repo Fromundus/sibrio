@@ -90,7 +90,7 @@ const CookieHelpModal = ({ helpModal, handleToggleHelpModal }) => {
                                 </div>
                             </div>
                             <div className='w-5/6'>
-                                <span>Find the Cookie and copy it. It usually starts with <span className='text-green-500'>"_ga=GA*********************"</span></span>
+                                <span>Find the Cookie and copy it.</span>
                             </div>
                         </div>
                         <div className='flex items-center gap-4 w-full'>
@@ -100,7 +100,7 @@ const CookieHelpModal = ({ helpModal, handleToggleHelpModal }) => {
                                 </div>
                             </div>
                             <div className='w-5/6'>
-                                <span><button className='text-accent font-bold' onClick={() => handleToggleHelpModal(false)}>Close this modal</button> and paste the cookie on the cookie input in the Leaderboard Settings.</span>
+                                <span><button className='text-accent font-bold' onClick={() => handleToggleHelpModal(false)}>Close this modal</button> and paste the cookie on the cookie input in the Settings.</span>
                             </div>
                         </div>
                     </div>

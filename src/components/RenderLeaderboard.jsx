@@ -117,7 +117,7 @@ const RenderLeaderboard = ({ leaderboard, users, loading, setLoading, settings, 
     <div className="w-full flex flex-col items-center gap-4">
         <LeaderboardInfo setLoading={setLoading} settings={settings} leaderboard={leaderboard} />
 
-        {leaderboard?.status === "ended" && <h1 className="text-2xl text-white font-extrabold flex items-center gap-2">LIST OF <span className='text-primary'>WINNERS</span></h1>}
+        {leaderboard?.status === "ended" && <h1 className="text-2xl text-white font-extrabold flex items-center gap-2 mb-4">LIST OF <span className='text-primary'>WINNERS</span></h1>}
 
         {/* Top 3 Section */}
         {users?.length >= 1 && (
